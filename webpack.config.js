@@ -1,66 +1,75 @@
-const webpack = require("webpack");
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
-const production = process.env.NODE_ENV === 'production';
+let mode = 'development';
+let target = 'web';
+if (process.env.NODE_ENV === 'production') {
+  mode = 'production';
+  target = 'browserslist';
+}
 
+const plugins = [
+  new MiniCssExtractPlugin({
+    filename: '[name].[contenthash].css',
+  }),
+  new HtmlWebpackPlugin({
+    template: './src/index.html',
+  }),
+];
+
+if (process.env.SERVE) {
+  plugins.push(new ReactRefreshWebpackPlugin());
+}
 
 module.exports = {
-    entry: { myAppName: path.resolve(__dirname, "./src/index.js") },
-    output: {
-        path: path.resolve(__dirname, "./dist"),
-        filename: production ? '[name].[contenthash].js' : '[name].js',
-    },
-    module: {
-        rules: [
-            {
-                test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
-                use: ["babel-loader"],
-            },
-            {
-                test: /\.s(a|c)ss$/,
-                exclude: /node_modules/,
-                use: [
-                    production ? MiniCssExtractPlugin.loader : 'style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: true,
-                            sourceMap: !production
-                        }
-                    },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            sourceMap: !production
-                        }
-                    }
-                ]
-            },
+  mode,
+  target,
+  plugins,
+  devtool: 'source-map',
+  entry: './src/index.js',
+  devServer: {
+    static: './dist',
+    hot: true,
+  },
 
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    assetModuleFilename: 'assets/[hash][ext][query]',
+    clean: true,
+  },
+
+  module: {
+    rules: [
+      { test: /\.(html)$/, use: ['html-loader'] },
+      {
+        test: /\.(s[ac]|c)ss$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
         ],
-    },
-    resolve: {
-        extensions: ["*", ".js", ".jsx", ".scss"],
-    },
-    plugins: [
-        new CleanWebpackPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
-        new HtmlWebpackPlugin({
-            title: "Webpack & React",
-            template: "./src/index.html",
-            favicon: "./public/favicon.ico"
-        }),
-        new MiniCssExtractPlugin({
-            filename: production ? '[name].[contenthash].css' : '[name].css',
-        }),
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg|webp|ico)$/i,
+        type: mode === 'production' ? 'asset' : 'asset/resource',
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+          },
+        },
+      },
     ],
-    devServer: {
-        port: 3001,
-        hot: true,
-    },
-    mode: production ? 'production' : 'development'
+  },
 };
