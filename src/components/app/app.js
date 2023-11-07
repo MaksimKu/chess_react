@@ -1,22 +1,35 @@
 import React, { useState, useEffect } from 'react';
 
-function Example() {
-  const [count, setCount] = useState(0);
+let clientHeight = document.documentElement.clientHeight - 8;
+window.addEventListener('resize', ()=>{
+  clientHeight = document.documentElement.clientHeight - 8;
+  document.querySelector('.tafel').style.width=`${clientHeight}px`;
+  document.querySelector('.tafel').style.height=`${clientHeight}px`;
+  console.log(clientHeight)
+})
 
-  // По принципу componentDidMount и componentDidUpdate:
-  useEffect(() => {
-    // Обновляем заголовок документа, используя API браузера
-    document.title = `Вы нажали ${count} раз`;
-  });
+function CellTafel() {
+  let arr = []
+  for (let i = 1; i <= 64; i++) {
+    let x = String(Math.ceil(i / 8));
+    let y = String(i % 8);
+    if (y==='0') {
+      y = '8'
+    }
+    arr.push(
+      <div className='Cell' 
+    id={x + y}></div>
+    )
+  }
+  return arr
+}
 
+function App() {
   return (
-    <div>
-      <p>Вы нажали {count} джраз</p>
-      <button onClick={() => setCount(count + 1)}>
-        Нажми на меня
-      </button>
+    <div className='tafel' style={{width: `${clientHeight}px`, height:`${clientHeight}px`}}>
+      <CellTafel/>
     </div>
   );
 }
 
-export default Example
+export default App

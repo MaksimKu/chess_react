@@ -1,6 +1,20 @@
+body {
+    background-color: aqua;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
 .tafel {
+    background-color: azure;
     background-image: url(images/chess.jpg);
     background-size: 100%;
     width: 700px;
     height: 700px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -4px;
+}
+.Cell {
+    flex-basis: 12.5%;
 }
