@@ -1,5 +1,5 @@
 body {
-    background-color: aqua;
+    background-color:rgb(33, 139, 6);
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -17,4 +17,36 @@ body {
 }
 .Cell {
     flex-basis: 12.5%;
+}
+.chess {
+    
+    z-index: 2;
+    height: 86%;
+    width: 145%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    flex-basis: auto;
+    flex-shrink: 0;
+    margin-left: -23%;
+    margin-top: -39%;
+}
+.chessWhite {
+    display: flex;
+    flex-basis: 13%;
+    flex-wrap: wrap;
+    
+}
+.chessBlack {
+    display: flex;
+    flex-basis: 13%;
+    flex-wrap: wrap;
+}
+.chessWhiteImg {
+    width: 50%;
+    height: 10%;
+}
+.chessBlackImg {
+    width: 50%;
+    height: 10%;
 }
