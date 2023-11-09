@@ -12,15 +12,27 @@ import korolBlack from '../../images/korol_chyorn.png';
 import ferzWhite from '../../images/ferz_bel.png';
 import ferzBlack from '../../images/ferz_chyorn.png';
 
-let clientHeight = document.documentElement.clientHeight - 8;
-let clientWidth = document.documentElement.clientWidth;
+let clientTafel = {
+  height: document.documentElement.clientHeight,
+  width: document.documentElement.clientWidth
+};
+
 
 function heightTafel () {
-  clientHeight = document.documentElement.clientHeight - 8;
-  clientWidth = document.documentElement.clientWidth;
-  if (clientHeight < clientWidth) {
-    document.querySelector('.tafel').style.width=`${clientHeight}px`;
-    document.querySelector('.tafel').style.height=`${clientHeight}px`;
+  clientTafel.height = document.documentElement.clientHeight;
+  clientTafel.width = document.documentElement.clientWidth;
+  if (clientTafel.height < clientTafel.width) {
+    document.querySelector('.wrapTafel').style.width=`${clientTafel.height}px`;
+    document.querySelector('.wrapTafel').style.height=`${clientTafel.height}px`;
+    // console.log(clientTafel.height * 2)
+    document.querySelectorAll('.chessImg').forEach(item => item.style.width=`${clientTafel.height * 0.09}px`)
+    document.querySelectorAll('.chessImg').forEach(item => item.style.height=`${clientTafel.height * 0.09}px`)
+  } else {
+    document.querySelector('.wrapTafel').style.width=`${clientTafel.width}px`;
+    document.querySelector('.wrapTafel').style.height=`${clientTafel.width}px`;
+    // console.log(clientTafel.height * 2)
+    document.querySelectorAll('.chessImg').forEach(item => item.style.width=`${clientTafel.width * 0.09}px`)
+    document.querySelectorAll('.chessImg').forEach(item => item.style.height=`${clientTafel.width * 0.09}px`)
   }
 }
 window.addEventListener('resize', ()=>{
@@ -41,50 +53,53 @@ function CellTafel() {
     id={x + y}></div>
     )
   }
-  return arr
+  return (<div className='tafel'>{arr}</div>)
 }
 
 function App() {
   let i =
    (
-    <div className='tafel' style={{width: `${clientHeight}px`, height:`${clientHeight}px`}}>
-      <CellTafel/>
+    <div className='wrapper'>
+      <div className='wrapTafel'>
+        <CellTafel/>
+      </div>
+      
       <div className='chess'>
         <div className='chessWhite'>
-          <img className='chessWhiteImg' id='whitePawnA' src={peshka_2_bel}/>
-          <img className='chessWhiteImg' id='whitePawnB' src={peshka_2_bel}/>
-          <img className='chessWhiteImg' id='whitePawnC' src={peshka_2_bel}/>
-          <img className='chessWhiteImg' id='whitePawnD' src={peshka_2_bel}/>
-          <img className='chessWhiteImg' id='whitePawnE' src={peshka_2_bel}/>
-          <img className='chessWhiteImg' id='whitePawnF' src={peshka_2_bel}/>
-          <img className='chessWhiteImg' id='whitePawnG' src={peshka_2_bel}/>
-          <img className='chessWhiteImg' id='whitePawnH' src={peshka_2_bel}/>
-          <img className='chessWhiteImg' id='whiteRockA' src={ladyaWhite}/>
-          <img className='chessWhiteImg' id='whiteRockH' src={ladyaWhite}/>
-          <img className='chessWhiteImg' id='whiteHorseB' src={horseWhite}/>
-          <img className='chessWhiteImg' id='whiteHorseG' src={horseWhite}/>
-          <img className='chessWhiteImg' id='whiteOficerC' src={oficerWhite}/>
-          <img className='chessWhiteImg' id='whiteOficerF' src={oficerWhite}/>
-          <img className='chessWhiteImg' id='whiteKorol' src={korolWhite}/>
-          <img className='chessWhiteImg' id='whiteFerz' src={ferzWhite}/>
+          <img className='chessImg' id='whitePawnA' src={peshka_2_bel}/>
+          <img className='chessImg' id='whitePawnB' src={peshka_2_bel}/>
+          <img className='chessImg' id='whitePawnC' src={peshka_2_bel}/>
+          <img className='chessImg' id='whitePawnD' src={peshka_2_bel}/>
+          <img className='chessImg' id='whitePawnE' src={peshka_2_bel}/>
+          <img className='chessImg' id='whitePawnF' src={peshka_2_bel}/>
+          <img className='chessImg' id='whitePawnG' src={peshka_2_bel}/>
+          <img className='chessImg' id='whitePawnH' src={peshka_2_bel}/>
+          <img className='chessImg' id='whiteRockA' src={ladyaWhite}/>
+          <img className='chessImg' id='whiteRockH' src={ladyaWhite}/>
+          <img className='chessImg' id='whiteHorseB' src={horseWhite}/>
+          <img className='chessImg' id='whiteHorseG' src={horseWhite}/>
+          <img className='chessImg' id='whiteOficerC' src={oficerWhite}/>
+          <img className='chessImg' id='whiteOficerF' src={oficerWhite}/>
+          <img className='chessImg' id='whiteKorol' src={korolWhite}/>
+          <img className='chessImg' id='whiteFerz' src={ferzWhite}/>
         </div>
         <div className='chessBlack'>
-          <img className='chessBlackImg' id='BlackPawnA' src={peshka_2_chyorn}/>
-          <img className='chessBlackImg' id='BlackPawnB' src={peshka_2_chyorn}/>
-          <img className='chessBlackImg' id='BlackPawnC' src={peshka_2_chyorn}/>
-          <img className='chessBlackImg' id='BlackPawnD' src={peshka_2_chyorn}/>
-          <img className='chessBlackImg' id='BlackPawnE' src={peshka_2_chyorn}/>
-          <img className='chessBlackImg' id='BlackPawnF' src={peshka_2_chyorn}/>
-          <img className='chessBlackImg' id='BlackPawnG' src={peshka_2_chyorn}/>
-          <img className='chessBlackImg' id='BlackPawnH' src={peshka_2_chyorn}/>
-          <img className='chessBlackImg' id='BlackRockA' src={ladyaBlack}/>
-          <img className='chessBlackImg' id='BlackRockH' src={ladyaBlack}/>
-          <img className='chessBlackImg' id='BlackHorseB' src={horseBlack}/>
-          <img className='chessBlackImg' id='BlackHorseG' src={horseBlack}/>
-          <img className='chessBlackImg' id='BlackOficerC' src={oficerBlack}/>
-          <img className='chessBlackImg' id='BlackOficerF' src={oficerBlack}/>
-          <img className='chessBlackImg' id='BlackKorol' src={korolBlack}/>
-          <img className='chessBlackImg' id='BlackFerz' src={ferzBlack}/>
+          <img className='chessImg' id='BlackPawnA' src={peshka_2_chyorn}/>
+          <img className='chessImg' id='BlackPawnB' src={peshka_2_chyorn}/>
+          <img className='chessImg' id='BlackPawnC' src={peshka_2_chyorn}/>
+          <img className='chessImg' id='BlackPawnD' src={peshka_2_chyorn}/>
+          <img className='chessImg' id='BlackPawnE' src={peshka_2_chyorn}/>
+          <img className='chessImg' id='BlackPawnF' src={peshka_2_chyorn}/>
+          <img className='chessImg' id='BlackPawnG' src={peshka_2_chyorn}/>
+          <img className='chessImg' id='BlackPawnH' src={peshka_2_chyorn}/>
+          <img className='chessImg' id='BlackRockA' src={ladyaBlack}/>
+          <img className='chessImg' id='BlackRockH' src={ladyaBlack}/>
+          <img className='chessImg' id='BlackHorseB' src={horseBlack}/>
+          <img className='chessImg' id='BlackHorseG' src={horseBlack}/>
+          <img className='chessImg' id='BlackOficerC' src={oficerBlack}/>
+          <img className='chessImg' id='BlackOficerF' src={oficerBlack}/>
+          <img className='chessImg' id='BlackKorol' src={korolBlack}/>
+          <img className='chessImg' id='BlackFerz' src={ferzBlack}/>
         </div>
       </div>
     </div>
