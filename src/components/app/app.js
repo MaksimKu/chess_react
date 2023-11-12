@@ -12,33 +12,7 @@ import korolBlack from '../../images/korol_chyorn.png';
 import ferzWhite from '../../images/ferz_bel.png';
 import ferzBlack from '../../images/ferz_chyorn.png';
 
-let clientTafel = {
-  height: document.documentElement.clientHeight,
-  width: document.documentElement.clientWidth
-};
 
-
-function heightTafel () {
-  clientTafel.height = document.documentElement.clientHeight;
-  clientTafel.width = document.documentElement.clientWidth;
-  if (clientTafel.height < clientTafel.width) {
-    document.querySelector('.wrapTafel').style.width=`${clientTafel.height}px`;
-    document.querySelector('.wrapTafel').style.height=`${clientTafel.height}px`;
-    // console.log(clientTafel.height * 2)
-    document.querySelectorAll('.chessImg').forEach(item => item.style.width=`${clientTafel.height * 0.09}px`)
-    document.querySelectorAll('.chessImg').forEach(item => item.style.height=`${clientTafel.height * 0.09}px`)
-  } else {
-    document.querySelector('.wrapTafel').style.width=`${clientTafel.width}px`;
-    document.querySelector('.wrapTafel').style.height=`${clientTafel.width}px`;
-    // console.log(clientTafel.height * 2)
-    document.querySelectorAll('.chessImg').forEach(item => item.style.width=`${clientTafel.width * 0.09}px`)
-    document.querySelectorAll('.chessImg').forEach(item => item.style.height=`${clientTafel.width * 0.09}px`)
-  }
-}
-window.addEventListener('resize', ()=>{
-  heightTafel()
-})
-// heightTafel()
 
 function CellTafel() {
   let arr = []
@@ -104,7 +78,6 @@ function App() {
       </div>
     </div>
   );
-  console.log(i)
   return i
 }
 
