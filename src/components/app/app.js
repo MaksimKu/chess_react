@@ -14,6 +14,7 @@ import ferzBlack from '../../images/ferz_chyorn.png';
 
 
 
+
 function CellTafel() {
   let arr = []
   for (let i = 1; i <= 64; i++) {

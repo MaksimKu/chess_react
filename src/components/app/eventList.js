@@ -12,6 +12,7 @@ let clientTafel = {
     clientTafel.width = document.documentElement.clientWidth;
     
     if (clientTafel.height < clientTafel.width) {
+      document.querySelector('body').setAttribute('style', `margin-top: 0px`)
         clientTafel.heightWrap = `${clientTafel.height}px`;
         clientTafel.widthWrap = `${clientTafel.height}px`;
         clientTafel.sizeImgChess = `${0.09 * clientTafel.height}px`;
@@ -22,6 +23,7 @@ let clientTafel = {
         if (game){document.querySelector('.chess').style.height = `${clientTafel.height}px`;
         document.querySelector('.chess').style.width = `${clientTafel.height * 1.6}px`;}
     } else {
+        document.querySelector('body').setAttribute('style', `margin-top: ${(clientTafel.height - clientTafel.width)/2}px`)
         clientTafel.heightWrap = `${clientTafel.width}px`;
         clientTafel.widthWrap = `${clientTafel.width}px`;
         clientTafel.sizeImgChess = `${0.09 * clientTafel.width}px`;
@@ -51,12 +53,8 @@ let clientTafel = {
         chess.setAttribute('style', 
         `display:flex; height:auto; width:auto; justify-content:left;
          min-width:0; margin-top:6vmin; margin-left:-83vmin`)
-        // chess.style.display='flex';
-        // chess.style.height='auto';
-        // chess.style.width='auto';
-        // chess.style.justifyContent='auto'
-
     }
   })
+  
 
   export {clientTafel, heightTafel}
