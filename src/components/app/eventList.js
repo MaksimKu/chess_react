@@ -7,6 +7,9 @@ let clientTafel = {
   };
   let game = true;
   
+  function chessTafel() {
+    return 3
+  }
   function heightTafel () {
     clientTafel.height = document.documentElement.clientHeight;
     clientTafel.width = document.documentElement.clientWidth;
