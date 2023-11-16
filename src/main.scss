@@ -64,6 +64,6 @@ body {
         flex-wrap: wrap;
     }
         .chessImg {
-            transition: all 1s ease
-            
+            transition: top 1s ease, left 1s ease;
+            // transition: top 1s ease
         }

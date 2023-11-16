@@ -23,9 +23,10 @@ window.addEventListener('keydown', (e) => {
       let chess = document.querySelector('.chess');
       let chessImg = document.querySelectorAll('.chessImg');
       chessImg.forEach(item=>{
-        item.style.position='absolute'
+        item.style.opacity = '0.0';
+        item.style.position='absolute';
         item.style.left='0vmin';
-        item.style.top='0vmin'});
+        item.style.top='2vmin'});
       // document.getElementById('whitePawnA').style.left='5vw'
       chess.setAttribute('style', 
       `display:flex; height:auto; width:auto; justify-content:left;
@@ -39,20 +40,28 @@ window.addEventListener('keydown', (e) => {
 
 
   function chessTafel(arr) {
-    for (let chessItem of arr) {
-      console.log(chessItem)
-      document.getElementById(`${chessItem.name}`).style.left=`${(chessItem.xy[1] * 10.7) - 10.7}vmin`;
-      document.getElementById(`${chessItem.name}`).style.top=`${(chessItem.xy[0] * 10.7) - 8.7}vmin`;
-      // document.getElementById(`${chessItem.name}`).style.position='absolute';
-      console.log(chessItem.xy[1])
+    // let j = 0;
+    function k(chessItem){
+      let item = document.getElementById(`${chessItem.name}`)
+      item.style.opacity = '1';
+      item.style.left=`${(chessItem.xy[1] * 10.7) - 10.7}vmin`;
+      item.style.top=`${(chessItem.xy[0] * 10.7) - 8.7}vmin`;
+      
+    }
+    // console.log(55)
+    for (let i = 0; i < arr.length; i++) {
+      setTimeout(function () {
+        k(arr[i]);
+        }, 100 * i);
+      // console.log(i)
     }
   }
   // chessTafel(chessArrWhite);
   // chessTafel(chessArrBlack)
 
 
-  window.addEventListener('keypress', (e) => {
-    if(e.key==='j') {
-      chessTafel(chessArrWhite)
-      chessTafel(chessArrBlack)
-    }})
+  // window.addEventListener('keypress', (e) => {
+  //   if(e.key==='j') {
+  //     chessTafel(chessArrWhite)
+  //     chessTafel(chessArrBlack)
+  //   }})
