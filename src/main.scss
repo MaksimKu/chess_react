@@ -43,6 +43,7 @@ body {
     padding-top: 2vmin;
     position: absolute;
     justify-content: space-between;
+    // transition: all 1s ease
     
 }
 
@@ -63,6 +64,6 @@ body {
         flex-wrap: wrap;
     }
         .chessImg {
-            width: 50%;
-            height: 10%;
+            transition: all 1s ease
+            
         }

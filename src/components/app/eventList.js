@@ -1,3 +1,5 @@
+
+
 let clientTafel = {
     height: document.documentElement.clientHeight,
     width: document.documentElement.clientWidth,
@@ -7,8 +9,11 @@ let clientTafel = {
   };
   let game = true;
   
-  function chessTafel() {
-    return 3
+  function chessTafel(arr) {
+    for (let chessItem of arr) {
+      document.getElementById(`${chessItem.name}`).setAttribute('style', `left: ${chessItem.xy[0] * 9.375 - 9.375};
+      top: ${chessItem.xy[1] * 9,4375 - 7,4375}`)
+    }
   }
   function heightTafel () {
     clientTafel.height = document.documentElement.clientHeight;
@@ -46,18 +51,18 @@ let clientTafel = {
   window.addEventListener('resize', ()=>{
     heightTafel()
   })
-  window.addEventListener('keypress', (e) => {
-    if(e.key===' ') {
-        game = false
-        let chess = document.querySelector('.chess');
-        let chessImg = document.querySelectorAll('.chessImg');
-        chessImg.forEach(item=>item.style.position='absolute');
-        document.getElementById('whitePawnA').style.left='5vw'
-        chess.setAttribute('style', 
-        `display:flex; height:auto; width:auto; justify-content:left;
-         min-width:0; margin-top:6vmin; margin-left:-83vmin`)
-    }
-  })
-  
+  // window.addEventListener('keypress', (e) => {
+  //   if(e.key===' ') {
+  //       game = false
+  //       let chess = document.querySelector('.chess');
+  //       let chessImg = document.querySelectorAll('.chessImg');
+  //       chessImg.forEach(item=>item.style.position='absolute');
+  //       document.getElementById('whitePawnA').style.left='5vw'
+  //       chess.setAttribute('style', 
+  //       `display:flex; height:auto; width:auto; justify-content:left;
+  //        min-width:0; margin-top:6vmin; margin-left:-83vmin`)
+  //   }
+  // })
+ 
 
   export {clientTafel, heightTafel}

@@ -53,28 +53,28 @@ function App() {
           <img className='chessImg' id='whiteRockH' src={ladyaWhite}/>
           <img className='chessImg' id='whiteHorseB' src={horseWhite}/>
           <img className='chessImg' id='whiteHorseG' src={horseWhite}/>
-          <img className='chessImg' id='whiteOficerC' src={oficerWhite}/>
-          <img className='chessImg' id='whiteOficerF' src={oficerWhite}/>
-          <img className='chessImg' id='whiteKorol' src={korolWhite}/>
-          <img className='chessImg' id='whiteFerz' src={ferzWhite}/>
+          <img className='chessImg' id='whiteOfficerC' src={oficerWhite}/>
+          <img className='chessImg' id='whiteOfficerF' src={oficerWhite}/>
+          <img className='chessImg' id='whiteKing' src={korolWhite}/>
+          <img className='chessImg' id='whiteFerz1' src={ferzWhite}/>
         </div>
         <div className='chessBlack'>
-          <img className='chessImg' id='BlackPawnA' src={peshka_2_chyorn}/>
-          <img className='chessImg' id='BlackPawnB' src={peshka_2_chyorn}/>
-          <img className='chessImg' id='BlackPawnC' src={peshka_2_chyorn}/>
-          <img className='chessImg' id='BlackPawnD' src={peshka_2_chyorn}/>
-          <img className='chessImg' id='BlackPawnE' src={peshka_2_chyorn}/>
-          <img className='chessImg' id='BlackPawnF' src={peshka_2_chyorn}/>
-          <img className='chessImg' id='BlackPawnG' src={peshka_2_chyorn}/>
-          <img className='chessImg' id='BlackPawnH' src={peshka_2_chyorn}/>
-          <img className='chessImg' id='BlackRockA' src={ladyaBlack}/>
-          <img className='chessImg' id='BlackRockH' src={ladyaBlack}/>
-          <img className='chessImg' id='BlackHorseB' src={horseBlack}/>
-          <img className='chessImg' id='BlackHorseG' src={horseBlack}/>
-          <img className='chessImg' id='BlackOficerC' src={oficerBlack}/>
-          <img className='chessImg' id='BlackOficerF' src={oficerBlack}/>
-          <img className='chessImg' id='BlackKorol' src={korolBlack}/>
-          <img className='chessImg' id='BlackFerz' src={ferzBlack}/>
+          <img className='chessImg' id='blackPawnA' src={peshka_2_chyorn}/>
+          <img className='chessImg' id='blackPawnB' src={peshka_2_chyorn}/>
+          <img className='chessImg' id='blackPawnC' src={peshka_2_chyorn}/>
+          <img className='chessImg' id='blackPawnD' src={peshka_2_chyorn}/>
+          <img className='chessImg' id='blackPawnE' src={peshka_2_chyorn}/>
+          <img className='chessImg' id='blackPawnF' src={peshka_2_chyorn}/>
+          <img className='chessImg' id='blackPawnG' src={peshka_2_chyorn}/>
+          <img className='chessImg' id='blackPawnH' src={peshka_2_chyorn}/>
+          <img className='chessImg' id='blackRockA' src={ladyaBlack}/>
+          <img className='chessImg' id='blackRockH' src={ladyaBlack}/>
+          <img className='chessImg' id='blackHorseB' src={horseBlack}/>
+          <img className='chessImg' id='blackHorseG' src={horseBlack}/>
+          <img className='chessImg' id='blackOfficerC' src={oficerBlack}/>
+          <img className='chessImg' id='blackOfficerF' src={oficerBlack}/>
+          <img className='chessImg' id='blackKing' src={korolBlack}/>
+          <img className='chessImg' id='blackFerz1' src={ferzBlack}/>
         </div>
       </div>
     </div>
