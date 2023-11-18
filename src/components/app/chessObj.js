@@ -13,6 +13,12 @@ class superChess {
         this.firstStep = true
     }
     get xy() {return this._xy}
+    set xy([x,y]) {
+        this._xy = [x,y]
+        document.getElementById(`${this.name}`).style.left=`${(this.xy[1] * 10.7) - 10.7}vmin`;
+        document.getElementById(`${this.name}`).style.top=`${(this.xy[0] * 10.7) - 8.7}vmin`;
+        this.firstStep = false
+    }
 };
 class whitePawn extends superChess {
     step() {
@@ -43,7 +49,7 @@ class whitePawn extends superChess {
                 step.push(oneStep)
             }
         }
-        console.log(step)
+        return (step)
     }
 }
 class whiteRock extends superChess {}
@@ -127,4 +133,4 @@ let chessArrBlack = [
     new blackKing(8,5,'blackKing')
 ]
 
-export {chessArrWhite, chessArrBlack}
+export {chessArrWhite, chessArrBlack, arraysAreEqual}
