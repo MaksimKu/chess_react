@@ -90,10 +90,10 @@ function chessTafel(arr) {
 }
 
 window.addEventListener('click', (e)=>{
-  console.log(activeStep)
+  // console.log(activeStep)
   // 
   if (activeStep === true) {
-    console.log(activeStep)
+    // console.log(activeStep)
     
     if (e.target.className === 'chessImg') {
       let idChess = e.target.id;
@@ -108,7 +108,7 @@ window.addEventListener('click', (e)=>{
         activeStepArr = targetChess.step();
         activeChess = targetChess.name;
         activeStepArr.forEach((i)=>{
-          
+          console.log(i)
           document.getElementById(i.join('')).style.opacity='0.5'
           // activeStep = false;
         })
@@ -170,20 +170,19 @@ window.addEventListener('click', (e)=>{
 
   
 })
-//
 
-  window.addEventListener('keypress', (e) => {
-    if(e.key===' ') {
-        game = false
-        let chess = document.querySelector('.chess');
-        let chessImg = document.querySelectorAll('.chessImg');
-        chessImg.forEach(item=>item.style.position='absolute');
-        document.getElementById('whitePawnA').style.left='5vw'
-        chess.setAttribute('style', 
-        `display:flex; height:auto; width:auto; justify-content:left;
-         min-width:0; margin-top:6vmin; margin-left:-83vmin`)
-    }
-  })
- //
+  // window.addEventListener('keypress', (e) => {
+  //   if(e.key===' ') {
+  //       game = false
+  //       let chess = document.querySelector('.chess');
+  //       let chessImg = document.querySelectorAll('.chessImg');
+  //       chessImg.forEach(item=>item.style.position='absolute');
+  //       document.getElementById('whitePawnA').style.left='5vw'
+  //       chess.setAttribute('style', 
+  //       `display:flex; height:auto; width:auto; justify-content:left;
+  //        min-width:0; margin-top:6vmin; margin-left:-83vmin`)
+  //   }
+  // })
+
 
   export {clientTafel, heightTafel}
