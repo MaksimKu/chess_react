@@ -104,6 +104,37 @@ function stepOfficer (frend, enemy, stepArr, chess) {
         } else {break}
     }
 }
+function stepHorse (frend, enemy, stepArr, chess) {
+    function arr() {
+       if (1 <= i[0] && i[0] <= 8 && 1 <= i[1] && i[1] <= 8)
+        if (!frend.find((item)=> arraysAreEqual(item.xy, i))) {
+            console.log(66)
+            if (enemy.find((item)=> arraysAreEqual(item.xy, i))) {
+                stepArr.push(i);
+                
+            } else {
+                stepArr.push(i)
+            }
+        }
+    };
+    let i = [chess.xy[0] + 2,chess.xy[1] + 1];
+    arr()
+    i = [chess.xy[0] + 2,chess.xy[1] - 1];
+    arr()
+    i = [chess.xy[0] - 2,chess.xy[1] + 1];
+    arr()
+    i = [chess.xy[0] - 2,chess.xy[1] - 1];
+    arr()
+    i = [chess.xy[0] + 1,chess.xy[1] + 2];
+    arr()
+    i = [chess.xy[0] + 1,chess.xy[1] - 2];
+    arr()
+    i = [chess.xy[0] - 1,chess.xy[1] + 2];
+    arr()
+    i = [chess.xy[0] - 1,chess.xy[1] - 2];
+    arr()
+
+}
 class whitePawn extends superChess {
     step() {
         let step = [];
@@ -143,7 +174,13 @@ class whiteRock extends superChess {
         return stepArr;
     }
 }
-class whiteHorse extends superChess {}
+class whiteHorse extends superChess {
+    step() {
+        let stepArr = [];
+        stepHorse(chessArrWhite,chessArrBlack,stepArr,this);
+        return stepArr;
+    }
+}
 class whiteOfficer extends superChess{
     step() {
         let stepArr = [];
@@ -159,7 +196,9 @@ class whiteFerz extends superChess {
         return stepArr;
     }
 }
-class whiteKing extends superChess {}
+class whiteKing extends superChess {
+    
+}
 
 class blackPawn extends superChess {
     step() {
