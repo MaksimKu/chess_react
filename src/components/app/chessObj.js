@@ -203,39 +203,64 @@ class whiteKing extends superChess {
 class blackPawn extends superChess {
     step() {
         let step = [];
-        let oneStep = [this.xy[0] + 1, this.xy[1]];
+        let oneStep = [this.xy[0] - 1, this.xy[1]];
         if (oneStep[0] <= 8) {
-            if (!chessArrWhite.find(item=> arraysAreEqual(item.xy, oneStep))) {
-                if (!chessArrBlack.find(item=> arraysAreEqual(item.xy, oneStep)))
+            if (!chessArrBlack.find(item=> arraysAreEqual(item.xy, oneStep))) {
+                if (!chessArrWhite.find(item=> arraysAreEqual(item.xy, oneStep)))
                 step.push(oneStep)
             }
         }
-        oneStep = [this.xy[0] + 2, this.xy[1]];
-        if (oneStep[0] <= 8) {
-            if (!chessArrWhite.find(item=> arraysAreEqual(item.xy, oneStep))) {
-                if (!chessArrBlack.find(item=> arraysAreEqual(item.xy, oneStep)))
+        oneStep = [this.xy[0] - 2, this.xy[1]];
+        if (this.firstStep === true) {
+            if (!chessArrBlack.find(item=> arraysAreEqual(item.xy, oneStep))) {
+                if (!chessArrWhite.find(item=> arraysAreEqual(item.xy, oneStep)))
                 step.push(oneStep)
             }
         }
-        oneStep = [this.xy[0] + 1, this.xy[1] + 1];
+        oneStep = [this.xy[0] - 1, this.xy[1] + 1];
         if (oneStep[0] <= 8 && oneStep[1] <= 8 && oneStep[1] >= 1) {
             if (chessArrWhite.find(item=> arraysAreEqual(item.xy, oneStep))) {
                 step.push(oneStep)
             }
         }
-        oneStep = [this.xy[0] + 1, this.xy[1] - 1];
+        oneStep = [this.xy[0] - 1, this.xy[1] - 1];
         if (oneStep[0] <= 8 && oneStep[1] <= 8 && oneStep[1] >= 1) {
             if (chessArrWhite.find(item=> arraysAreEqual(item.xy, oneStep))) {
                 step.push(oneStep)
             }
         }
-        console.log(step)
+        return (step)
     }
 }
-class blackRock extends superChess {}
-class blackHorse extends superChess {}
-class blackOfficer extends superChess{}
-class blackFerz extends superChess {}
+class blackRock extends superChess {
+    step() {
+        let stepArr = [];
+        stepRock(chessArrBlack,chessArrWhite,stepArr,this);
+        return stepArr;
+    }
+}
+class blackHorse extends superChess {
+    step() {
+        let stepArr = [];
+        stepHorse(chessArrBlack,chessArrWhite,stepArr,this);
+        return stepArr;
+    }
+}
+class blackOfficer extends superChess{
+    step() {
+        let stepArr = [];
+        stepOfficer(chessArrBlack,chessArrWhite,stepArr,this);
+        return stepArr
+    }
+}
+class blackFerz extends superChess {
+    step() {
+        let stepArr = [];
+        stepRock(chessArrBlack,chessArrWhite,stepArr,this);
+        stepOfficer(chessArrBlack,chessArrWhite,stepArr,this);
+        return stepArr;
+    }
+}
 class blackKing extends superChess {}
 
 let chessArrWhite = [

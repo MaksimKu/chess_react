@@ -118,16 +118,17 @@ window.addEventListener('click', (e)=>{
       if (gameSetting.colorChess === 'black' && idChess.includes('black')) {
         let targetChess;
         chessArrBlack.forEach(item => {
+          console.log(item.name === idChess)
           if (item.name === idChess) {
             targetChess = item
+            
           }
         })
-        // console.log(targetChess.step())
-        let j = targetChess.step()
-        // console.log(j)
-        j.forEach((i)=>{
-          // console.log(7)
-          document.getElementById(`${i.join()}`).style.opacity='0.5'
+        activeStepArr = targetChess.step();
+        activeChess = targetChess.name;
+        activeStepArr.forEach((i)=>{
+          console.log(i)
+          document.getElementById(i.join('')).style.opacity='0.5'
         })
       }
       activeStep = false;
