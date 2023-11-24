@@ -376,8 +376,8 @@ class blackOfficer extends superChess{
 class blackFerz extends superChess {
     step() {
         let stepArr = [];
-        stepRock(chessArrBlack,chessArrWhite,this, true).forEach((i)=>stepArr.push(i))
-        stepOfficer(chessArrBlack,chessArrWhite,this, true).forEach((i)=>stepArr.push(i))
+        stepRock(chessArrBlack,chessArrWhite,this, false).forEach((i)=>stepArr.push(i))
+        stepOfficer(chessArrBlack,chessArrWhite,this, false).forEach((i)=>stepArr.push(i))
         return stepArr;
         
     }
