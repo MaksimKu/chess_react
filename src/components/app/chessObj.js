@@ -20,8 +20,10 @@ class superChess {
         this.firstStep = false
     }
 };
-function stepRock (frend, enemy, stepArr, chess) {
-    for (let i = chess.xy[0] + 1; i < 8; i++) {
+
+function stepRock (frend, enemy, chess, kill) {
+    let stepArr = [];
+    for (let i = chess.xy[0] + 1; i <= 8; i++) {
         if (!frend.find((item)=> arraysAreEqual(item.xy, [i, chess.xy[1]]))) {
             if (enemy.find((item)=> arraysAreEqual(item.xy, [i, chess.xy[1]]))) {
                 stepArr.push([i, chess.xy[1]]);
@@ -29,7 +31,12 @@ function stepRock (frend, enemy, stepArr, chess) {
             } else {
                 stepArr.push([i, chess.xy[1]])
             }
-        } else {break}
+        } else {
+            if (kill) {
+                stepArr.push([i, chess.xy[1]]);
+            }
+            break
+        }
     }
     for (let i = chess.xy[0] - 1; i >= 1; i--) {
         if (!frend.find((item)=> arraysAreEqual(item.xy, [i, chess.xy[1]]))) {
@@ -39,7 +46,12 @@ function stepRock (frend, enemy, stepArr, chess) {
             } else {
                 stepArr.push([i, chess.xy[1]])
             }
-        } else {break}
+        } else {
+            if (kill) {
+                stepArr.push([i, chess.xy[1]]);
+            }
+            break
+        }
     }
     for (let i = chess.xy[1] + 1; i <= 8; i++) {
         if (!frend.find((item)=> arraysAreEqual(item.xy, [chess.xy[0], i]))) {
@@ -49,7 +61,12 @@ function stepRock (frend, enemy, stepArr, chess) {
             } else {
                 stepArr.push([chess.xy[0], i])
             }
-        } else {break}
+        } else {
+            if (kill) {
+                stepArr.push([chess.xy[0], i]);
+            }
+            break
+        }
     }
     for (let i = chess.xy[1] - 1; i >= 1; i--) {
         if (!frend.find((item)=> arraysAreEqual(item.xy, [chess.xy[0], i]))) {
@@ -59,10 +76,17 @@ function stepRock (frend, enemy, stepArr, chess) {
             } else {
                 stepArr.push([chess.xy[0], i])
             }
-        } else {break}
+        } else {
+            if (kill) {
+                stepArr.push([chess.xy[0], i]);
+            }
+            break
+        }
     }
+    return stepArr
 }
-function stepOfficer (frend, enemy, stepArr, chess) {
+function stepOfficer (frend, enemy, chess, kill) {
+    let stepArr =[];
     for (let i = [chess.xy[0]+1, chess.xy[1]+1]; i[0] <= 8 && i[1] <= 8; i = [i[0]+1, i[1]+1]) {
         if (!frend.find((item)=> arraysAreEqual(item.xy, i))) {
             if (enemy.find((item)=> arraysAreEqual(item.xy, i))) {
@@ -71,7 +95,12 @@ function stepOfficer (frend, enemy, stepArr, chess) {
             } else {
                 stepArr.push(i)
             }
-        } else {break}
+        } else {
+            if (kill) {
+                stepArr.push(i);
+            }
+            break
+        }
     }
     for (let i = [chess.xy[0]-1, chess.xy[1]+1]; i[0] >= 1 && i[1] <= 8; i = [i[0]-1, i[1]+1]) {
         if (!frend.find((item)=> arraysAreEqual(item.xy, i))) {
@@ -81,7 +110,12 @@ function stepOfficer (frend, enemy, stepArr, chess) {
             } else {
                 stepArr.push(i)
             }
-        } else {break}
+        } else {
+            if (kill) {
+                stepArr.push(i);
+            }
+            break
+        }
     }
     for (let i = [chess.xy[0]+1, chess.xy[1]-1]; i[0] <= 8 && i[1] >= 1; i = [i[0]+1, i[1]-1]) {
         if (!frend.find((item)=> arraysAreEqual(item.xy, i))) {
@@ -91,7 +125,12 @@ function stepOfficer (frend, enemy, stepArr, chess) {
             } else {
                 stepArr.push(i)
             }
-        } else {break}
+        } else {
+            if (kill) {
+                stepArr.push(i);
+            }
+            break
+        }
     }
     for (let i = [chess.xy[0]-1, chess.xy[1]-1]; i[0] >= 1 && i[1] >= 1; i = [i[0]-1, i[1]-1]) {
         if (!frend.find((item)=> arraysAreEqual(item.xy, i))) {
@@ -101,20 +140,23 @@ function stepOfficer (frend, enemy, stepArr, chess) {
             } else {
                 stepArr.push(i)
             }
-        } else {break}
+        } else {
+            if (kill) {
+                stepArr.push(i);
+            }
+            break
+        }
     }
+    return stepArr
 }
-function stepHorse (frend, enemy, stepArr, chess) {
+function stepHorse (frend, chess, kill) {
+    let stepArr = [];
     function arr() {
        if (1 <= i[0] && i[0] <= 8 && 1 <= i[1] && i[1] <= 8)
         if (!frend.find((item)=> arraysAreEqual(item.xy, i))) {
-            console.log(66)
-            if (enemy.find((item)=> arraysAreEqual(item.xy, i))) {
-                stepArr.push(i);
-                
-            } else {
-                stepArr.push(i)
-            }
+            stepArr.push(i);    
+        } else {
+            if (kill) stepArr.push(i);
         }
     };
     let i = [chess.xy[0] + 2,chess.xy[1] + 1];
@@ -133,6 +175,43 @@ function stepHorse (frend, enemy, stepArr, chess) {
     arr()
     i = [chess.xy[0] - 1,chess.xy[1] - 2];
     arr()
+    return stepArr
+}
+function stepKing (frend, enemy, chess, kill) {
+    let stepArr = []
+    let arrEnemyStep = new Set()
+    if (!kill) {
+        enemy.forEach((item) => {
+            item.stepKill().forEach(i=>arrEnemyStep.add(i.toString()))
+        })
+    }       
+    let step = [chess.xy[0] + 1, chess.xy[1]];
+    function arr () {
+        if (1 <= step[0] && step[0] <= 8 && 1 <= step[1] && step[1] <= 8 && !arrEnemyStep.has(step.toString())) {
+            if (!frend.find((item)=> arraysAreEqual(item.xy, step))) {
+                stepArr.push(step)
+                } else {
+                    if (kill) stepArr.push(step)
+                }
+            }
+    }
+    arr()
+    step = [chess.xy[0] + 1, chess.xy[1] + 1];
+    arr()
+    step = [chess.xy[0] + 1, chess.xy[1] - 1];
+    arr()
+    step = [chess.xy[0] - 1, chess.xy[1] + 1];
+    arr()
+    step = [chess.xy[0] - 1, chess.xy[1] - 1];
+    arr()
+    step = [chess.xy[0] - 1, chess.xy[1]];
+    arr()
+    step = [chess.xy[0], chess.xy[1] + 1];
+    arr()
+    step = [chess.xy[0], chess.xy[1] - 1];
+    arr()
+    console.log(chessArrBlack[14].stepKill())
+   return stepArr
 
 }
 class whitePawn extends superChess {
@@ -166,38 +245,64 @@ class whitePawn extends superChess {
         }
         return (step)
     }
+    stepKill() {
+        let step = [];
+        let oneStep = [this.xy[0] + 1, this.xy[1] + 1];
+        if(oneStep[0] <= 8 && oneStep[1] <= 8) {
+            step.push(oneStep)
+        }
+        oneStep = [this.xy[0] + 1, this.xy[1] - 1]
+        if(oneStep[0] <= 8 && oneStep[1] >= 1) {
+            step.push(oneStep)
+        }
+        return step;
+    }
 }
 class whiteRock extends superChess {
     step() {
-        let stepArr = [];
-        stepRock(chessArrWhite,chessArrBlack,stepArr,this);
-        return stepArr;
+        return stepRock(chessArrWhite,chessArrBlack,this,false);
+    }
+    stepKill() {
+        return stepRock(chessArrWhite,chessArrBlack,this, true);
     }
 }
 class whiteHorse extends superChess {
     step() {
-        let stepArr = [];
-        stepHorse(chessArrWhite,chessArrBlack,stepArr,this);
-        return stepArr;
+        return stepHorse(chessArrWhite,this, false);
+    }
+    stepKill() {
+        return stepHorse(chessArrWhite,this, true);
     }
 }
 class whiteOfficer extends superChess{
     step() {
-        let stepArr = [];
-        stepOfficer(chessArrWhite,chessArrBlack,stepArr,this);
-        return stepArr
+        return stepOfficer(chessArrWhite,chessArrBlack,this,false);
+    }
+    stepKill() {
+        return stepOfficer(chessArrWhite,chessArrBlack,this,true);
     }
 }
 class whiteFerz extends superChess {
     step() {
         let stepArr = [];
-        stepRock(chessArrWhite,chessArrBlack,stepArr,this);
-        stepOfficer(chessArrWhite,chessArrBlack,stepArr,this);
+        stepRock(chessArrWhite,chessArrBlack,this, false).forEach((i)=>stepArr.push(i))
+        stepOfficer(chessArrWhite,chessArrBlack,this, false).forEach((i)=>stepArr.push(i))
+        return stepArr;
+    }
+    stepKill() {
+        let stepArr = [];
+        stepRock(chessArrWhite,chessArrBlack,this, true).forEach((i)=>stepArr.push(i))
+        stepOfficer(chessArrWhite,chessArrBlack,this, true).forEach((i)=>stepArr.push(i))
         return stepArr;
     }
 }
 class whiteKing extends superChess {
-    
+    step() {
+        return stepKing(chessArrWhite,chessArrBlack,this,false)
+    }
+    stepKill() {
+        return stepKing(chessArrWhite,chessArrBlack,this,true)
+    }
 }
 
 class blackPawn extends superChess {
@@ -231,37 +336,66 @@ class blackPawn extends superChess {
         }
         return (step)
     }
+    stepKill() {
+        let step = [];
+        let oneStep = [this.xy[0] - 1, this.xy[1] + 1];
+        if(oneStep[0] >= 1 && oneStep[1] <= 8) {
+            step.push(oneStep)
+        }
+        oneStep = [this.xy[0] - 1, this.xy[1] - 1]
+        if(oneStep[0] >= 1 && oneStep[1] >= 1) {
+            step.push(oneStep)
+        }
+        return step;
+    }
 }
 class blackRock extends superChess {
     step() {
-        let stepArr = [];
-        stepRock(chessArrBlack,chessArrWhite,stepArr,this);
-        return stepArr;
+        return stepRock(chessArrBlack,chessArrWhite,this,false);
+    }
+    stepKill() {
+        return stepRock(chessArrBlack,chessArrWhite,this,true);
     }
 }
 class blackHorse extends superChess {
     step() {
-        let stepArr = [];
-        stepHorse(chessArrBlack,chessArrWhite,stepArr,this);
-        return stepArr;
+        return stepHorse(chessArrBlack,this, false);
+    }
+    stepKill() {
+        return stepHorse(chessArrBlack,this, true);
     }
 }
 class blackOfficer extends superChess{
     step() {
-        let stepArr = [];
-        stepOfficer(chessArrBlack,chessArrWhite,stepArr,this);
-        return stepArr
+        return stepOfficer(chessArrBlack,chessArrWhite,this,false);
+    }
+    stepKill() {
+        return stepOfficer(chessArrBlack,chessArrWhite,this,false);
     }
 }
 class blackFerz extends superChess {
     step() {
         let stepArr = [];
-        stepRock(chessArrBlack,chessArrWhite,stepArr,this);
-        stepOfficer(chessArrBlack,chessArrWhite,stepArr,this);
+        stepRock(chessArrBlack,chessArrWhite,this, true).forEach((i)=>stepArr.push(i))
+        stepOfficer(chessArrBlack,chessArrWhite,this, true).forEach((i)=>stepArr.push(i))
+        return stepArr;
+        
+    }
+    stepKill() {
+        let stepArr = [];
+        stepRock(chessArrBlack,chessArrWhite,this, true).forEach((i)=>stepArr.push(i))
+        stepOfficer(chessArrBlack,chessArrWhite,this, true).forEach((i)=>stepArr.push(i))
         return stepArr;
     }
 }
-class blackKing extends superChess {}
+class blackKing extends superChess {
+    step() {
+        return stepKing(chessArrBlack,chessArrWhite,this,false)
+    }
+    stepKill() {
+        return stepKing(chessArrBlack,chessArrWhite,this,true)
+    }
+}
 
 let chessArrWhite = [
     new whitePawn(2,1,'whitePawnA'),
@@ -276,7 +410,7 @@ let chessArrWhite = [
     new whiteRock(1,8,'whiteRockH'),
     new whiteHorse(1,2,'whiteHorseB'),
     new whiteHorse(1,7,'whiteHorseG'),
-    new whiteOfficer(5,5,'whiteOfficerC'),
+    new whiteOfficer(1,3,'whiteOfficerC'),
     new whiteOfficer(1,6,'whiteOfficerF'),
     new whiteFerz(1,4,'whiteFerz1'),
     new whiteKing(1,5,'whiteKing')
