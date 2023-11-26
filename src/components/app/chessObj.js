@@ -5,19 +5,32 @@ function arraysAreEqual(a, b) {
     }
     return true;
 }
-
+let stepHistory = []
 class superChess {
-    constructor(x,y,name){
+    constructor(x,y,name,life){
         this._xy = [x, y],
         this.name = name,
-        this.firstStep = true
+        this.firstStep = true,
+        this._life = life
     }
     get xy() {return this._xy}
     set xy([x,y]) {
+        let step = [this.name,this.life,[x,y],this.xy];
+        stepHistory.push(step);
         this._xy = [x,y]
         document.getElementById(`${this.name}`).style.left=`${(this.xy[1] * 10.7) - 10.7}vmin`;
         document.getElementById(`${this.name}`).style.top=`${(this.xy[0] * 10.7) - 8.7}vmin`;
-        this.firstStep = false
+        this.firstStep = false;
+        
+    }
+    get life() {return this._life}
+    set life(i) {
+        if (i) {
+            this._life = i
+        } else {
+            this._life = i;
+            document.getElementById(`${this.name}`).style.display='none'
+        }
     }
 };
 
@@ -210,7 +223,7 @@ function stepKing (frend, enemy, chess, kill) {
     arr()
     step = [chess.xy[0], chess.xy[1] - 1];
     arr()
-    console.log(chessArrBlack[14].stepKill())
+    // console.log(chessArrBlack[14].stepKill())
    return stepArr
 
 }
@@ -236,6 +249,7 @@ class whitePawn extends superChess {
             if (chessArrBlack.find(item=> arraysAreEqual(item.xy, oneStep))) {
                 step.push(oneStep)
             }
+
         }
         oneStep = [this.xy[0] + 1, this.xy[1] - 1];
         if (oneStep[0] <= 8 && oneStep[1] <= 8 && oneStep[1] >= 1) {
@@ -398,40 +412,40 @@ class blackKing extends superChess {
 }
 
 let chessArrWhite = [
-    new whitePawn(2,1,'whitePawnA'),
-    new whitePawn(2,2,'whitePawnB'),
-    new whitePawn(2,3,'whitePawnC'),
-    new whitePawn(2,4,'whitePawnD'),
-    new whitePawn(2,5,'whitePawnE'),
-    new whitePawn(2,6,'whitePawnF'),
-    new whitePawn(2,7,'whitePawnG'),
-    new whitePawn(2,8,'whitePawnH'),
-    new whiteRock(1,1,'whiteRockA'),
-    new whiteRock(1,8,'whiteRockH'),
-    new whiteHorse(1,2,'whiteHorseB'),
-    new whiteHorse(1,7,'whiteHorseG'),
-    new whiteOfficer(1,3,'whiteOfficerC'),
-    new whiteOfficer(1,6,'whiteOfficerF'),
-    new whiteFerz(1,4,'whiteFerz1'),
-    new whiteKing(1,5,'whiteKing')
+    new whitePawn(2,1,'whitePawnA', true),
+    new whitePawn(2,2,'whitePawnB', true),
+    new whitePawn(2,3,'whitePawnC', true),
+    new whitePawn(2,4,'whitePawnD', true),
+    new whitePawn(2,5,'whitePawnE', true),
+    new whitePawn(2,6,'whitePawnF', true),
+    new whitePawn(2,7,'whitePawnG', true),
+    new whitePawn(2,8,'whitePawnH', true),
+    new whiteRock(1,1,'whiteRockA', true),
+    new whiteRock(1,8,'whiteRockH', true),
+    new whiteHorse(1,2,'whiteHorseB', true),
+    new whiteHorse(1,7,'whiteHorseG', true),
+    new whiteOfficer(1,3,'whiteOfficerC', true),
+    new whiteOfficer(1,6,'whiteOfficerF', true),
+    new whiteFerz(1,4,'whiteFerz1', true),
+    new whiteKing(1,5,'whiteKing', true)
 ];
 let chessArrBlack = [
-    new blackPawn(7,1,'blackPawnA'),
-    new blackPawn(7,2,'blackPawnB'),
-    new blackPawn(7,3,'blackPawnC'),
-    new blackPawn(7,4,'blackPawnD'),
-    new blackPawn(7,5,'blackPawnE'),
-    new blackPawn(7,6,'blackPawnF'),
-    new blackPawn(7,7,'blackPawnG'),
-    new blackPawn(7,8,'blackPawnH'),
-    new blackRock(8,1,'blackRockA'),
-    new blackRock(8,8,'blackRockH'),
-    new blackHorse(8,2,'blackHorseB'),
-    new blackHorse(8,7,'blackHorseG'),
-    new blackOfficer(8,3,'blackOfficerC'),
-    new blackOfficer(8,6,'blackOfficerF'),
-    new blackFerz(8,4,'blackFerz1'),
-    new blackKing(8,5,'blackKing')
+    new blackPawn(7,1,'blackPawnA', true),
+    new blackPawn(7,2,'blackPawnB', true),
+    new blackPawn(7,3,'blackPawnC', true),
+    new blackPawn(7,4,'blackPawnD', true),
+    new blackPawn(7,5,'blackPawnE', true),
+    new blackPawn(7,6,'blackPawnF', true),
+    new blackPawn(7,7,'blackPawnG', true),
+    new blackPawn(7,8,'blackPawnH', true),
+    new blackRock(8,1,'blackRockA', true),
+    new blackRock(8,8,'blackRockH', true),
+    new blackHorse(8,2,'blackHorseB', true),
+    new blackHorse(8,7,'blackHorseG', true),
+    new blackOfficer(8,3,'blackOfficerC', true),
+    new blackOfficer(8,6,'blackOfficerF', true),
+    new blackFerz(8,4,'blackFerz1', true),
+    new blackKing(8,5,'blackKing', true)
 ]
 
 export {chessArrWhite, chessArrBlack, arraysAreEqual}
