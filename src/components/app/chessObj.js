@@ -29,7 +29,8 @@ class superChess {
             this._life = i
         } else {
             this._life = i;
-            document.getElementById(`${this.name}`).style.display='none'
+            document.getElementById(`${this.name}`).style.display='none';
+            this.xy = [10,10]
         }
     }
 };
@@ -412,7 +413,7 @@ class blackKing extends superChess {
 }
 
 let chessArrWhite = [
-    new whitePawn(2,1,'whitePawnA', true),
+    new whitePawn(2,1,'whitePawnA', true, chessArrWhite),
     new whitePawn(2,2,'whitePawnB', true),
     new whitePawn(2,3,'whitePawnC', true),
     new whitePawn(2,4,'whitePawnD', true),

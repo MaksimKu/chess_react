@@ -15,3 +15,4 @@ let game = true;
 ReactDOM.render(<App/>, document.getElementById('root'));
 heightTafel()
 
+// console.log(chessArrBlack[0])

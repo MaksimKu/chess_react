@@ -10,7 +10,7 @@ let clientTafel = {
   let game = true;
   let activeStep = false;
   let activeStepArr = [];
-  let activeChess = ''
+  let activeChess;
   let gameSetting = {
     colorChess: 'white'
   }
@@ -173,120 +173,241 @@ function chessTafel(arr) {
   
 // })
 
-window.addEventListener('click', (e)=>{
+// window.addEventListener('click', (e)=>{
+//   if (activeStep) {
+//     //клик по пустой клетке
+//     activeStep = false;
+//     document.querySelectorAll('.Cell').forEach(item=>item.style.opacity = '0.0')
+//     if (e.target.className === 'Cell') {
+//         let arrId = e.target.id.split('')
+//         arrId.forEach((item,index)=>{arrId[index] = Number(item)})
+//         let stepTrue = false;
+//         activeStepArr.forEach((item)=>{
+//           if(arraysAreEqual(arrId, item)) {
+//             stepTrue = true
+//           }
+
+//         })
+//         //ход на пустую клетку
+//         if(stepTrue) {
+//           chessArrBlack.forEach((item) => {
+//             if (item.name === activeChess) {
+//               item.xy = arrId
+//             }
+//           })
+//           chessArrWhite.forEach((item) => {
+//             if (item.name === activeChess) {
+//               item.xy = arrId
+//             }
+//           })
+//         }
+//       }
+//       //клик по занятой клетке при активном ходе(сЪесть)
+//       if (e.target.className === 'chessImg') {
+        
+//         if (!e.target.id.includes(gameSetting.colorChess)) {
+//           chessArrWhite.forEach((item) => {
+//             if (item.name === e.target.id && item.life === true) {
+//               item.life = false;
+
+//               chessArrBlack.forEach((i) => {
+//                 if (i.name === activeChess) {
+//                   i.xy = item.xy
+//                 }
+//               })
+              
+//             }
+//           })
+//           chessArrBlack.forEach((item) => {
+//             if (item.name === e.target.id && item.life === true) {
+//               item.life = false;
+//               // console.log(activeChess)
+//               chessArrWhite.forEach((i) => {
+//                 if (i.name === activeChess) {
+//                   i.xy = item.xy
+//                 }
+//               })  
+//             }
+//           })
+//         } else {
+//           activeStepChess(e)
+//         }
+//       }
+//   } else {
+//     // if (e.target.className === 'chessImg') {
+//     //   if (e.target.id.includes(gameSetting.colorChess)) {
+//     //     chessArrWhite.forEach((item) => {
+//     //       if (item.name === e.target.id && item.life === true) {
+//     //         activeChess = e.target.id;
+//     //         activeStepArr = item.step();
+//     //         activeStepArr.forEach((i)=>{
+//     //           document.getElementById(i.join('')).style.opacity='0.5'
+//     //         })
+//     //         activeStep = true
+//     //       }
+//     //     })
+//     //     chessArrBlack.forEach((item) => {
+//     //       if (item.name === e.target.id && item.life === true) {
+//     //         activeChess = e.target.id;
+//     //         activeStepArr = item.step();
+//     //         activeStepArr.forEach((i)=>{
+//     //           document.getElementById(i.join('')).style.opacity='0.5'
+//     //         })
+//     //         activeStep = true
+//     //       }
+//     //     })
+//     //   }
+//     // }
+//     activeStepChess(e)
+
+//   }
+// })
+
+
+window.addEventListener('click', function clickChess(event) {
+  let classElemClick = event.target.className;
+  let idElenClick = event.target.id;
   if (activeStep) {
-    //клик по пустой клетке
     activeStep = false;
     document.querySelectorAll('.Cell').forEach(item=>item.style.opacity = '0.0')
-    if (e.target.className === 'Cell') {
-        let arrId = e.target.id.split('')
+
+    if (classElemClick === 'Cell') {  //клик по пустой клетке
+      let arrId = idElenClick.split('')
         arrId.forEach((item,index)=>{arrId[index] = Number(item)})
-        let stepTrue = false;
-        activeStepArr.forEach((item)=>{
-          if(arraysAreEqual(arrId, item)) {
-            stepTrue = true
+        let cellChess = false;              ///клетка занята?
+        chessArrWhite.forEach((item)=>{
+          if(arraysAreEqual(arrId, item.xy)) {
+            cellChess = true
           }
-
         })
-        //ход на пустую клетку
-        if(stepTrue) {
-          chessArrBlack.forEach((item) => {
-            if (item.name === activeChess) {
-              item.xy = arrId
-            }
+        chessArrBlack.forEach((item)=>{
+          if(arraysAreEqual(arrId, item.xy)) {
+            cellChess = true
+          }
+        })
+        if (cellChess !== true) {           /// клетка не занята
+          let booleanCell = false;
+          activeStepArr.forEach((item) => {
+            if (arraysAreEqual(arrId, item)) booleanCell = true
           })
-          chessArrWhite.forEach((item) => {
-            if (item.name === activeChess) {
-              item.xy = arrId
-            }
-          })
+          if (gameSetting.colorChess === 'white') {
+            chessArrWhite.forEach((item) => {
+              if (booleanCell) {
+                activeChess.xy = arrId
+              }
+            })
+          } else {
+            chessArrBlack.forEach((item) => {
+              if (booleanCell) {
+                activeChess.xy = arrId
+              }
+            })
+          }
         }
+    }
+    if (classElemClick === 'chessImg') {   ///ход
+      // let enemyXY;
+      if (gameSetting.colorChess === 'white') {
+        chessArrBlack.forEach((item) => {
+          if (idElenClick === item.name && activeStepArr.find((i)=>arraysAreEqual(i, item.xy))) {
+            activeChess.xy = item.xy;
+            item.life = false
+          }
+        })
+        chessArrWhite.forEach((item) => {
+          if (item.name === idElenClick && item.life === true) {
+            activeChess = item;
+            activeStepArr = item.step();
+            activeStepArr.forEach((i)=>{
+              document.getElementById(i.join('')).style.opacity='0.5'
+            })
+            activeStep = true
+          }
+        })
+      } else {
+        chessArrWhite.forEach((item) => {
+          if (idElenClick === item.name) {
+            activeChess.xy = item.xy;
+            item.life = false
+          }
+        })
+        chessArrBlack.forEach((item) => {
+          if (item.name === idElenClick && item.life === true) {
+            activeChess = item;
+            activeStepArr = item.step();
+            activeStepArr.forEach((i)=>{
+              document.getElementById(i.join('')).style.opacity='0.5'
+            })
+            activeStep = true
+          }
+        })
       }
-      //клик по занятой клетке при активном ходе(сЪесть)
-      if (e.target.className === 'chessImg') {
-        
-        if (!e.target.id.includes(gameSetting.colorChess)) {
-          chessArrWhite.forEach((item) => {
-            if (item.name === e.target.id && item.life === true) {
-              item.life = false;
-              
-              chessArrBlack.forEach((i) => {
-                if (i.name === activeChess) {
-                  i.xy = item.xy
-                }
-              })
-              
-            }
-          })
-          chessArrBlack.forEach((item) => {
-            if (item.name === e.target.id && item.life === true) {
-              item.life = false;
-              // console.log(activeChess)
-              chessArrWhite.forEach((i) => {
-                if (i.name === activeChess) {
-                  i.xy = item.xy
-                }
-              })  
-            }
-          })
-        } else {
-          activeStepChess(e)
-        }
-      }
-  } else {
-    // if (e.target.className === 'chessImg') {
-    //   if (e.target.id.includes(gameSetting.colorChess)) {
-    //     chessArrWhite.forEach((item) => {
-    //       if (item.name === e.target.id && item.life === true) {
-    //         activeChess = e.target.id;
-    //         activeStepArr = item.step();
-    //         activeStepArr.forEach((i)=>{
-    //           document.getElementById(i.join('')).style.opacity='0.5'
-    //         })
-    //         activeStep = true
-    //       }
-    //     })
-    //     chessArrBlack.forEach((item) => {
-    //       if (item.name === e.target.id && item.life === true) {
-    //         activeChess = e.target.id;
-    //         activeStepArr = item.step();
-    //         activeStepArr.forEach((i)=>{
-    //           document.getElementById(i.join('')).style.opacity='0.5'
-    //         })
-    //         activeStep = true
-    //       }
-    //     })
-    //   }
-    // }
-    activeStepChess(e)
+      // if (activeStepArr.find((item)=>arraysAreEqual(item, enemyXY))) {
 
-  }
-})
-function activeStepChess (e) {
-  if (e.target.className === 'chessImg') {
-    if (e.target.id.includes(gameSetting.colorChess)) {
-      chessArrWhite.forEach((item) => {
-        if (item.name === e.target.id && item.life === true) {
-          activeChess = e.target.id;
-          activeStepArr = item.step();
-          activeStepArr.forEach((i)=>{
-            document.getElementById(i.join('')).style.opacity='0.5'
-          })
-          activeStep = true
-        }
-      })
-      chessArrBlack.forEach((item) => {
-        if (item.name === e.target.id && item.life === true) {
-          activeChess = e.target.id;
-          activeStepArr = item.step();
-          activeStepArr.forEach((i)=>{
-            document.getElementById(i.join('')).style.opacity='0.5'
-          })
-          activeStep = true
-        }
-      })
+      // }
+
+    } else {
+
+    }
+    // if (classElemClick === 'chessImg' && idElenClick.includes('King')) {  /// ход короля
+
+    // }
+
+  } else {
+    if (classElemClick === 'chessImg' && idElenClick.includes(gameSetting.colorChess)) {
+      if (gameSetting.colorChess === 'white') {  ///белые
+        chessArrWhite.forEach((item) => {
+          if (item.name === idElenClick && item.life === true) {
+            activeChess = item;
+            activeStepArr = item.step();
+            activeStepArr.forEach((i)=>{
+              document.getElementById(i.join('')).style.opacity='0.5'
+            })
+            activeStep = true
+          }
+        })
+      } else {                      //// черные
+        chessArrBlack.forEach((item) => {
+          if (item.name === idElenClick && item.life === true) {
+            activeChess = item;
+            activeStepArr = item.step();
+            activeStepArr.forEach((i)=>{
+              document.getElementById(i.join('')).style.opacity='0.5'
+            })
+            activeStep = true
+          }
+        })
+      }
     }
   }
+})
+
+function activeStepChess (event) {
+  if (classElemClick === 'chessImg' && idElenClick.includes(gameSetting.colorChess)) {
+      if (gameSetting.colorChess === 'white') {  ///белые
+        chessArrWhite.forEach((item) => {
+          if (item.name === idElenClick && item.life === true) {
+            activeChess = idElenClick;
+            activeStepArr = item.step();
+            activeStepArr.forEach((i)=>{
+              document.getElementById(i.join('')).style.opacity='0.5'
+            })
+            activeStep = true
+          }
+        })
+      } else {                      //// черные
+        chessArrBlack.forEach((item) => {
+          if (item.name === idElenClick && item.life === true) {
+            activeChess = idElenClick;
+            activeStepArr = item.step();
+            activeStepArr.forEach((i)=>{
+              document.getElementById(i.join('')).style.opacity='0.5'
+            })
+            activeStep = true
+          }
+        })
+      }
+    }
 }
 
   window.addEventListener('keypress', (e) => {
