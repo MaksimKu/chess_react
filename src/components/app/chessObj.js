@@ -30,7 +30,7 @@ class superChess {
         } else {
             this._life = i;
             document.getElementById(`${this.name}`).style.display='none';
-            this.xy = [10,10]
+            // this.xy = [10,10]
         }
     }
 };
@@ -38,8 +38,8 @@ class superChess {
 function stepRock (frend, enemy, chess, kill) {
     let stepArr = [];
     for (let i = chess.xy[0] + 1; i <= 8; i++) {
-        if (!frend.find((item)=> arraysAreEqual(item.xy, [i, chess.xy[1]]))) {
-            if (enemy.find((item)=> arraysAreEqual(item.xy, [i, chess.xy[1]]))) {
+        if (!frend.find((item)=>item.life && arraysAreEqual(item.xy, [i, chess.xy[1]]))) {
+            if (enemy.find((item)=>item.life && arraysAreEqual(item.xy, [i, chess.xy[1]]))) {
                 stepArr.push([i, chess.xy[1]]);
                 break
             } else {
@@ -53,8 +53,8 @@ function stepRock (frend, enemy, chess, kill) {
         }
     }
     for (let i = chess.xy[0] - 1; i >= 1; i--) {
-        if (!frend.find((item)=> arraysAreEqual(item.xy, [i, chess.xy[1]]))) {
-            if (enemy.find((item)=> arraysAreEqual(item.xy, [i, chess.xy[1]]))) {
+        if (!frend.find((item)=>item.life && arraysAreEqual(item.xy, [i, chess.xy[1]]))) {
+            if (enemy.find((item)=>item.life && arraysAreEqual(item.xy, [i, chess.xy[1]]))) {
                 stepArr.push([i, chess.xy[1]]);
                 break
             } else {
@@ -68,8 +68,8 @@ function stepRock (frend, enemy, chess, kill) {
         }
     }
     for (let i = chess.xy[1] + 1; i <= 8; i++) {
-        if (!frend.find((item)=> arraysAreEqual(item.xy, [chess.xy[0], i]))) {
-            if (enemy.find((item)=> arraysAreEqual(item.xy, [chess.xy[0], i]))) {
+        if (!frend.find((item)=>item.life && arraysAreEqual(item.xy, [chess.xy[0], i]))) {
+            if (enemy.find((item)=>item.life && arraysAreEqual(item.xy, [chess.xy[0], i]))) {
                 stepArr.push([chess.xy[0], i]);
                 break
             } else {
@@ -83,8 +83,8 @@ function stepRock (frend, enemy, chess, kill) {
         }
     }
     for (let i = chess.xy[1] - 1; i >= 1; i--) {
-        if (!frend.find((item)=> arraysAreEqual(item.xy, [chess.xy[0], i]))) {
-            if (enemy.find((item)=> arraysAreEqual(item.xy, [chess.xy[0], i]))) {
+        if (!frend.find((item)=>item.life && arraysAreEqual(item.xy, [chess.xy[0], i]))) {
+            if (enemy.find((item)=>item.life && arraysAreEqual(item.xy, [chess.xy[0], i]))) {
                 stepArr.push([chess.xy[0], i]);
                 break
             } else {
@@ -102,8 +102,8 @@ function stepRock (frend, enemy, chess, kill) {
 function stepOfficer (frend, enemy, chess, kill) {
     let stepArr =[];
     for (let i = [chess.xy[0]+1, chess.xy[1]+1]; i[0] <= 8 && i[1] <= 8; i = [i[0]+1, i[1]+1]) {
-        if (!frend.find((item)=> arraysAreEqual(item.xy, i))) {
-            if (enemy.find((item)=> arraysAreEqual(item.xy, i))) {
+        if (!frend.find((item)=>item.life && arraysAreEqual(item.xy, i))) {
+            if (enemy.find((item)=>item.life && arraysAreEqual(item.xy, i))) {
                 stepArr.push(i);
                 break
             } else {
@@ -117,8 +117,8 @@ function stepOfficer (frend, enemy, chess, kill) {
         }
     }
     for (let i = [chess.xy[0]-1, chess.xy[1]+1]; i[0] >= 1 && i[1] <= 8; i = [i[0]-1, i[1]+1]) {
-        if (!frend.find((item)=> arraysAreEqual(item.xy, i))) {
-            if (enemy.find((item)=> arraysAreEqual(item.xy, i))) {
+        if (!frend.find((item)=>item.life && arraysAreEqual(item.xy, i))) {
+            if (enemy.find((item)=>item.life && arraysAreEqual(item.xy, i))) {
                 stepArr.push(i);
                 break
             } else {
@@ -132,8 +132,8 @@ function stepOfficer (frend, enemy, chess, kill) {
         }
     }
     for (let i = [chess.xy[0]+1, chess.xy[1]-1]; i[0] <= 8 && i[1] >= 1; i = [i[0]+1, i[1]-1]) {
-        if (!frend.find((item)=> arraysAreEqual(item.xy, i))) {
-            if (enemy.find((item)=> arraysAreEqual(item.xy, i))) {
+        if (!frend.find((item)=>item.life && arraysAreEqual(item.xy, i))) {
+            if (enemy.find((item)=>item.life && arraysAreEqual(item.xy, i))) {
                 stepArr.push(i);
                 break
             } else {
@@ -147,8 +147,8 @@ function stepOfficer (frend, enemy, chess, kill) {
         }
     }
     for (let i = [chess.xy[0]-1, chess.xy[1]-1]; i[0] >= 1 && i[1] >= 1; i = [i[0]-1, i[1]-1]) {
-        if (!frend.find((item)=> arraysAreEqual(item.xy, i))) {
-            if (enemy.find((item)=> arraysAreEqual(item.xy, i))) {
+        if (!frend.find((item)=>item.life && arraysAreEqual(item.xy, i))) {
+            if (enemy.find((item)=>item.life && arraysAreEqual(item.xy, i))) {
                 stepArr.push(i);
                 break
             } else {
@@ -167,7 +167,7 @@ function stepHorse (frend, chess, kill) {
     let stepArr = [];
     function arr() {
        if (1 <= i[0] && i[0] <= 8 && 1 <= i[1] && i[1] <= 8)
-        if (!frend.find((item)=> arraysAreEqual(item.xy, i))) {
+        if (!frend.find((item)=>item.life && arraysAreEqual(item.xy, i))) {
             stepArr.push(i);    
         } else {
             if (kill) stepArr.push(i);
@@ -196,13 +196,14 @@ function stepKing (frend, enemy, chess, kill) {
     let arrEnemyStep = new Set()
     if (!kill) {
         enemy.forEach((item) => {
+            if (item.life)
             item.stepKill().forEach(i=>arrEnemyStep.add(i.toString()))
         })
     }       
     let step = [chess.xy[0] + 1, chess.xy[1]];
     function arr () {
         if (1 <= step[0] && step[0] <= 8 && 1 <= step[1] && step[1] <= 8 && !arrEnemyStep.has(step.toString())) {
-            if (!frend.find((item)=> arraysAreEqual(item.xy, step))) {
+            if (!frend.find((item)=>item.life && arraysAreEqual(item.xy, step))) {
                 stepArr.push(step)
                 } else {
                     if (kill) stepArr.push(step)
@@ -233,28 +234,28 @@ class whitePawn extends superChess {
         let step = [];
         let oneStep = [this.xy[0] + 1, this.xy[1]];
         if (oneStep[0] <= 8) {
-            if (!chessArrWhite.find(item=> arraysAreEqual(item.xy, oneStep))) {
-                if (!chessArrBlack.find(item=> arraysAreEqual(item.xy, oneStep)))
+            if (!chessArrWhite.find(item=>item.life && arraysAreEqual(item.xy, oneStep))) {
+                if (!chessArrBlack.find(item=>item.life && arraysAreEqual(item.xy, oneStep)))
                 step.push(oneStep)
             }
         }
         oneStep = [this.xy[0] + 2, this.xy[1]];
         if (this.firstStep === true) {
-            if (!chessArrWhite.find(item=> arraysAreEqual(item.xy, oneStep))) {
-                if (!chessArrBlack.find(item=> arraysAreEqual(item.xy, oneStep)))
+            if (!chessArrWhite.find(item=>item.life && arraysAreEqual(item.xy, oneStep))) {
+                if (!chessArrBlack.find(item=>item.life && arraysAreEqual(item.xy, oneStep)))
                 step.push(oneStep)
             }
         }
         oneStep = [this.xy[0] + 1, this.xy[1] + 1];
         if (oneStep[0] <= 8 && oneStep[1] <= 8 && oneStep[1] >= 1) {
-            if (chessArrBlack.find(item=> arraysAreEqual(item.xy, oneStep))) {
+            if (chessArrBlack.find(item=>item.life && arraysAreEqual(item.xy, oneStep))) {
                 step.push(oneStep)
             }
 
         }
         oneStep = [this.xy[0] + 1, this.xy[1] - 1];
         if (oneStep[0] <= 8 && oneStep[1] <= 8 && oneStep[1] >= 1) {
-            if (chessArrBlack.find(item=> arraysAreEqual(item.xy, oneStep))) {
+            if (chessArrBlack.find(item=>item.life && arraysAreEqual(item.xy, oneStep))) {
                 step.push(oneStep)
             }
         }
