@@ -225,7 +225,13 @@ function stepKing (frend, enemy, chess, kill) {
     arr()
     step = [chess.xy[0], chess.xy[1] - 1];
     arr()
-    // console.log(chessArrBlack[14].stepKill())
+    if (this.life === true) {
+        if (this.name.includes('white')) {
+            console.log(5)
+        } else {
+            console.log(6)
+        }
+    }
    return stepArr
 
 }
