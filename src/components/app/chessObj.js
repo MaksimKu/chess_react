@@ -1,3 +1,5 @@
+import {createChess} from './app'
+
 function arraysAreEqual(a, b) {
     if (a.length != b.length) return false;
     for (let i = 0; i < a.length; i++) {
@@ -5,6 +7,7 @@ function arraysAreEqual(a, b) {
     }
     return true;
 }
+var ferzNumber = 2;
 let stepHistory = []
 class superChess {
     constructor(x,y,name,life){
@@ -20,8 +23,48 @@ class superChess {
         this._xy = [x,y]
         document.getElementById(`${this.name}`).style.left=`${(this.xy[1] * 10.7) - 10.7}vmin`;
         document.getElementById(`${this.name}`).style.top=`${(this.xy[0] * 10.7) - 8.7}vmin`;
+        if(this.name.includes('Pawn')) {
+            if(this.name.includes('white')) {
+                if (x === 8) {
+                    console.log('23')
+                    // document.querySelector('.chessWhite').append(
+                    // createChess())
+                    // this.life = false;
+                    // ferzNumber++;
+                    this.step = chessArrWhite[14].step;
+                    this.stepKill = chessArrWhite[14].stepKill
+
+                }
+            } else {
+                if (x === 1) {
+                    console.log('22')
+                    this.step = chessArrBlack[14].step;
+                    this.stepKill = chessArrBlack[14].stepKill
+                }
+            }
+        }
+        if(this.name.includes('King')) {
+            if(this.name.includes('white')) {
+                if (this.firstStep === true && y === 3) {
+                    console.log()
+                    chessArrWhite[8].xy = [x,y+1]
+                }
+                if (this.firstStep === true && y === 7) {
+                    console.log()
+                    chessArrWhite[9].xy = [x,y-1]
+                }
+            } else {
+                if (this.firstStep === true && y === 3) {
+                    console.log()
+                    chessArrBlack[8].xy = [x,y+1]
+                }
+                if (this.firstStep === true && y === 7) {
+                    console.log()
+                    chessArrBlack[9].xy = [x,y-1]
+                }
+            }
+        }
         this.firstStep = false;
-        
     }
     get life() {return this._life}
     set life(i) {
@@ -225,12 +268,69 @@ function stepKing (frend, enemy, chess, kill) {
     arr()
     step = [chess.xy[0], chess.xy[1] - 1];
     arr()
-    if (this.life === true) {
-        if (this.name.includes('white')) {
-            console.log(5)
-        } else {
-            console.log(6)
-        }
+    if (chess.firstStep === true && !kill) {
+        
+            if (frend[8].firstStep === true) {
+                let chessBool = true;
+                let cellArr = [[chess.xy[0], chess.xy[1] - 1],[chess.xy[0], chess.xy[1] - 2],[chess.xy[0], chess.xy[1] - 3],
+                [chess.xy[0], chess.xy[1] + 1],[chess.xy[0], chess.xy[1] + 2]];
+                frend.forEach((item) => {
+                    if (item.life === true) {
+                        console.log(arraysAreEqual(item.xy, cellArr[0]) || arraysAreEqual(item.xy, cellArr[1]) || 
+                        arraysAreEqual(item.xy, cellArr[2]))
+                        if(arraysAreEqual(item.xy, cellArr[0]) || arraysAreEqual(item.xy, cellArr[1]) || 
+                        arraysAreEqual(item.xy, cellArr[2])) {
+                            chessBool = false;
+                            console.log('gg')
+                        }
+                    }
+                })
+                enemy.forEach((item) => {
+                    if (item.life === true) {
+                        console.log(arraysAreEqual(item.xy, cellArr[0]) || arraysAreEqual(item.xy, cellArr[1]) || 
+                        arraysAreEqual(item.xy, cellArr[2]))
+                        if(arraysAreEqual(item.xy, cellArr[0]) || arraysAreEqual(item.xy, cellArr[1]) || 
+                        arraysAreEqual(item.xy, cellArr[2])) {
+                            chessBool = false;
+                            console.log('gg')
+                        }
+                    }
+                })
+                
+                if (chessBool === true) {
+                    console.log(chess.xy)
+                    step = [chess.xy[0], chess.xy[1] - 2];
+                    console.log(step)
+                    arr()
+                }
+                chessBool = true;
+                frend.forEach((item) => {
+                    if (item.life === true) {
+                        // console.log(arraysAreEqual(item.xy, cellArr[3]) || arraysAreEqual(item.xy, cellArr[4]))
+                        if(arraysAreEqual(item.xy, cellArr[3]) || arraysAreEqual(item.xy, cellArr[4])) {
+                            chessBool = false;
+                            console.log('gg')
+                        }
+                    }
+                })
+                enemy.forEach((item) => {
+                    if (item.life === true) {
+                        console.log(arraysAreEqual(item.xy, cellArr[0]) || arraysAreEqual(item.xy, cellArr[1]) || 
+                        arraysAreEqual(item.xy, cellArr[2]))
+                        if(arraysAreEqual(item.xy, cellArr[3]) || arraysAreEqual(item.xy, cellArr[4])) {
+                            chessBool = false;
+                            console.log('gg')
+                        }
+                    }
+                })
+                if (chessBool === true) {
+                    console.log(chess.xy)
+                    step = [chess.xy[0], chess.xy[1] + 2];
+                    console.log(step)
+                    arr()
+                }
+            }
+        
     }
    return stepArr
 

@@ -12,7 +12,9 @@ import korolBlack from '../../images/korol_chyorn.png';
 import ferzWhite from '../../images/ferz_bel.png';
 import ferzBlack from '../../images/ferz_chyorn.png';
 
-
+function createChess() {
+  return <img className='chessImg' id={'whiteFerz1'} src={ferzWhite}/>
+}
 
 
 function CellTafel() {
@@ -82,4 +84,4 @@ function App() {
   return i
 }
 
-export default App
+export {App, createChess}

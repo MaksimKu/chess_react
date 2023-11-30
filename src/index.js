@@ -6,7 +6,7 @@ import {chessArrWhite, chessArrBlack} from './components/app/chessObj.js';
 
 
 
-import App from './components/app/app.js';
+import {App} from './components/app/app.js';
 import {clientTafel, heightTafel} from './components/app/eventList.js'
 
 
