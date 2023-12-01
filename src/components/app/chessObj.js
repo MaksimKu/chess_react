@@ -1,4 +1,6 @@
 import {createChess} from './app'
+import ferzWhite from '../../images/ferz_bel.png';
+import ferzBlack from '../../images/ferz_chyorn.png';
 
 function arraysAreEqual(a, b) {
     if (a.length != b.length) return false;
@@ -26,18 +28,21 @@ class superChess {
         if(this.name.includes('Pawn')) {
             if(this.name.includes('white')) {
                 if (x === 8) {
-                    console.log('23')
-                    // document.querySelector('.chessWhite').append(
-                    // createChess())
-                    // this.life = false;
-                    // ferzNumber++;
+                    console.log(document.getElementById(`${this.name}`))
+                    document.getElementById(`${this.name}`).src = ferzWhite;
+                    document.getElementById(`${this.name}`).id = 'whiteFerz' + ferzNumber;
+                    this.name = `${'whiteFerz' + ferzNumber}`;
+                    ferzNumber++
                     this.step = chessArrWhite[14].step;
                     this.stepKill = chessArrWhite[14].stepKill
 
                 }
             } else {
                 if (x === 1) {
-                    console.log('22')
+                    document.getElementById(`${this.name}`).src = ferzBlack;
+                    document.getElementById(`${this.name}`).id = 'blackFerz' + ferzNumber;
+                    this.name = `${'blackFerz' + ferzNumber}`;
+                    ferzNumber++
                     this.step = chessArrBlack[14].step;
                     this.stepKill = chessArrBlack[14].stepKill
                 }

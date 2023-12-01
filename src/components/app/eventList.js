@@ -276,12 +276,12 @@ window.addEventListener('click', function clickChess(event) {
         arrId.forEach((item,index)=>{arrId[index] = Number(item)})
         let cellChess = false;              ///клетка занята?
         chessArrWhite.forEach((item)=>{
-          if(arraysAreEqual(arrId, item.xy)) {
+          if(arraysAreEqual(arrId, item.xy) && item.life === true) {
             cellChess = true
           }
         })
         chessArrBlack.forEach((item)=>{
-          if(arraysAreEqual(arrId, item.xy)) {
+          if(arraysAreEqual(arrId, item.xy) && item.life === true) {
             cellChess = true
           }
         })
@@ -290,19 +290,24 @@ window.addEventListener('click', function clickChess(event) {
           activeStepArr.forEach((item) => {
             if (arraysAreEqual(arrId, item)) booleanCell = true
           })
-          if (gameSetting.colorChess === 'white') {
-            chessArrWhite.forEach((item) => {
-              if (booleanCell) {
-                activeChess.xy = arrId
-              }
-            })
-          } else {
-            chessArrBlack.forEach((item) => {
-              if (booleanCell) {
-                activeChess.xy = arrId
-              }
-            })
+          if (booleanCell) {
+            activeChess.xy = arrId
+            check(chessArrBlack,chessArrWhite)
+            check(chessArrWhite,chessArrBlack)
           }
+          // if (gameSetting.colorChess === 'white') {
+          //   chessArrWhite.forEach((item) => {
+          //     if (booleanCell) {
+          //       activeChess.xy = arrId
+          //     }
+          //   })
+          // } else {
+          //   chessArrBlack.forEach((item) => {
+          //     if (booleanCell) {
+          //       activeChess.xy = arrId
+          //     }
+          //   })
+          // }
         }
     }
     if (classElemClick === 'chessImg') {   ///ход
@@ -324,9 +329,10 @@ window.addEventListener('click', function clickChess(event) {
             activeStep = true
           }
         })
+        check(chessArrWhite,chessArrBlack)
       } else {
         chessArrWhite.forEach((item) => {
-          if (idElenClick === item.name) {
+          if (idElenClick === item.name && activeStepArr.find((i)=>arraysAreEqual(i, item.xy))) {
             activeChess.xy = item.xy;
             item.life = false
           }
@@ -341,6 +347,7 @@ window.addEventListener('click', function clickChess(event) {
             activeStep = true
           }
         })
+        check(chessArrBlack,chessArrWhite)
       }
       // if (activeStepArr.find((item)=>arraysAreEqual(item, enemyXY))) {
 
@@ -380,6 +387,8 @@ window.addEventListener('click', function clickChess(event) {
       }
     }
   }
+  // check(chessArrBlack,chessArrWhite)
+  // check(chessArrWhite,chessArrBlack)
 })
 
 function activeStepChess (event) {
@@ -410,17 +419,35 @@ function activeStepChess (event) {
     }
 }
 
-  window.addEventListener('keypress', (e) => {
-    if(e.key===' ') {
-      if (gameSetting.colorChess === 'white') {
-        gameSetting.colorChess = 'black'
-        
-    } else {
-      gameSetting.colorChess = 'white'
-    }
+function check (frend, enemy) {
+  let arrFrendStep = new Set()
+        frend.forEach((item) => {
+            if (item.life)
+            item.stepKill().forEach(i=>arrFrendStep.add(i.toString()))
+        })
+  if (arrFrendStep.has(enemy[15].xy.toString())) {
+    alert('шах');
+
+    // for (let item of enemy) {
+
+    // }
   }
-    // console.log(gameSetting.colorChess)
-  })
+  // for (let item of frend) {
+
+  // }
+}
+
+window.addEventListener('keypress', (e) => {
+  if(e.key===' ') {
+    if (gameSetting.colorChess === 'white') {
+      gameSetting.colorChess = 'black'
+      
+  } else {
+    gameSetting.colorChess = 'white'
+  }
+}
+  // console.log(gameSetting.colorChess)
+})
 
 
   export {clientTafel, heightTafel}
