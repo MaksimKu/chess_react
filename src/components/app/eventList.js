@@ -11,9 +11,40 @@ let clientTafel = {
   let activeStep = false;
   let activeStepArr = [];
   let activeChess;
-  let gameSetting = {
-    colorChess: 'white'
+
+
+  class gameSet {
+    constructor(color) {
+      this._color = color,
+      this._colorStep = 'white'
+    }
+    get color() {
+      return this._color
+    }
+    set color(item) {
+      if (item === 'white') {
+        document.querySelector('.wrapper').style.rotate = '180deg';
+        document.querySelectorAll('.chessImg').forEach((item) => item.style.rotate = '180deg')
+      } else {
+        document.querySelector('.wrapper').style.rotate = '0deg';
+        document.querySelectorAll('.chessImg').forEach((item) => item.style.rotate = '0deg')
+      }
+      this._color = item
+    }
+    get colorStep() {
+      return this._colorStep
+    }
+    set colorStep(item) {
+      if (this.color === 'white') {
+        window.addEventListener('click',clickChess)
+      } else {
+        window.removeEventListener('click',clickChess)
+      }
+      this._colorStep = item
+    }
   }
+  var gameSetting = new gameSet('white')
+  
 
   
   function heightTafel () {
@@ -67,7 +98,7 @@ window.addEventListener('keydown', (e) => {
       chess.setAttribute('style', 
       `display:flex; height:auto; width:auto; justify-content:left;
         min-width:0; margin-top:6vmin; margin-left:-83vmin`);
-      // console.log(gameSetting.colorChess)
+      // console.log(gameSetting.colorStep)
   }})
 window.addEventListener('keyup', (e) => {
   if(e.key==='k') {chessTafel(chessArrWhite)
@@ -89,182 +120,9 @@ function chessTafel(arr) {
   }
 }
 
-// window.addEventListener('click', (e)=>{
-//   // console.log(activeStep)
-//   // 
-//   if (activeStep === true) {
-//     // console.log(activeStep)
-    
-//     if (e.target.className === 'chessImg') {
-//       let idChess = e.target.id;
-//       // console.log(idChess)
-//       if (gameSetting.colorChess === 'white' && idChess.includes('white')) {
-//         let targetChess;
-//         chessArrWhite.forEach(item => {
-//           if (item.name === idChess) {
-//             targetChess = item
-//           }
-//         })
-//         activeStepArr = targetChess.step();
-//         activeChess = targetChess.name;
-//         activeStepArr.forEach((i)=>{
-//           console.log(i)
-//           document.getElementById(i.join('')).style.opacity='0.5'
-//           // activeStep = false;
-//         })
-//       }
-  
-  
-//       if (gameSetting.colorChess === 'black' && idChess.includes('black')) {
-//         let targetChess;
-//         chessArrBlack.forEach(item => {
-//           console.log(item.name === idChess)
-//           if (item.name === idChess) {
-//             targetChess = item
-            
-//           }
-//         })
-//         activeStepArr = targetChess.step();
-//         activeChess = targetChess.name;
-//         activeStepArr.forEach((i)=>{
-//           console.log(i)
-//           document.getElementById(i.join('')).style.opacity='0.5'
-//         })
-//       }
-//       activeStep = false;
-//     }
-//   } else {
-//     activeStep = true;
-//     // activeStepArr
-//     document.querySelectorAll('.Cell').forEach(item=>item.style.opacity = '0.0')
-//     if (e.target.className === 'Cell') {
-//         let arrId = e.target.id.split('')
-//         arrId.forEach((item,index)=>{arrId[index] = Number(item)})
-//         let stepTrue = false;
-//         activeStepArr.forEach((item)=>{
-//           if(arraysAreEqual(arrId, item)) {
-//             stepTrue = true
-//           }
-//           console.log(activeStepArr)
-//           console.log(arrId)
-//         })
-//         if(stepTrue) {
-//           console.log(activeChess)
-          
-//           chessArrBlack.forEach((item) => {
-//             console.log(item.name)
-//             if (item.name === activeChess) {
-//               item.xy = arrId
 
-//             }
-//           })
-//           chessArrWhite.forEach((item) => {
-//             // console.log(item.name)
-//             if (item.name === activeChess) {
-//               console.log(5)
-//               item.xy = arrId
-//             }
-//           })
-//         }
-//       }
-
-//   }
-
-  
-// })
-
-// window.addEventListener('click', (e)=>{
-//   if (activeStep) {
-//     //клик по пустой клетке
-//     activeStep = false;
-//     document.querySelectorAll('.Cell').forEach(item=>item.style.opacity = '0.0')
-//     if (e.target.className === 'Cell') {
-//         let arrId = e.target.id.split('')
-//         arrId.forEach((item,index)=>{arrId[index] = Number(item)})
-//         let stepTrue = false;
-//         activeStepArr.forEach((item)=>{
-//           if(arraysAreEqual(arrId, item)) {
-//             stepTrue = true
-//           }
-
-//         })
-//         //ход на пустую клетку
-//         if(stepTrue) {
-//           chessArrBlack.forEach((item) => {
-//             if (item.name === activeChess) {
-//               item.xy = arrId
-//             }
-//           })
-//           chessArrWhite.forEach((item) => {
-//             if (item.name === activeChess) {
-//               item.xy = arrId
-//             }
-//           })
-//         }
-//       }
-//       //клик по занятой клетке при активном ходе(сЪесть)
-//       if (e.target.className === 'chessImg') {
-        
-//         if (!e.target.id.includes(gameSetting.colorChess)) {
-//           chessArrWhite.forEach((item) => {
-//             if (item.name === e.target.id && item.life === true) {
-//               item.life = false;
-
-//               chessArrBlack.forEach((i) => {
-//                 if (i.name === activeChess) {
-//                   i.xy = item.xy
-//                 }
-//               })
-              
-//             }
-//           })
-//           chessArrBlack.forEach((item) => {
-//             if (item.name === e.target.id && item.life === true) {
-//               item.life = false;
-//               // console.log(activeChess)
-//               chessArrWhite.forEach((i) => {
-//                 if (i.name === activeChess) {
-//                   i.xy = item.xy
-//                 }
-//               })  
-//             }
-//           })
-//         } else {
-//           activeStepChess(e)
-//         }
-//       }
-//   } else {
-//     // if (e.target.className === 'chessImg') {
-//     //   if (e.target.id.includes(gameSetting.colorChess)) {
-//     //     chessArrWhite.forEach((item) => {
-//     //       if (item.name === e.target.id && item.life === true) {
-//     //         activeChess = e.target.id;
-//     //         activeStepArr = item.step();
-//     //         activeStepArr.forEach((i)=>{
-//     //           document.getElementById(i.join('')).style.opacity='0.5'
-//     //         })
-//     //         activeStep = true
-//     //       }
-//     //     })
-//     //     chessArrBlack.forEach((item) => {
-//     //       if (item.name === e.target.id && item.life === true) {
-//     //         activeChess = e.target.id;
-//     //         activeStepArr = item.step();
-//     //         activeStepArr.forEach((i)=>{
-//     //           document.getElementById(i.join('')).style.opacity='0.5'
-//     //         })
-//     //         activeStep = true
-//     //       }
-//     //     })
-//     //   }
-//     // }
-//     activeStepChess(e)
-
-//   }
-// })
-
-
-window.addEventListener('click', function clickChess(event) {
+function clickChess(event) {
+  // console.log(activeStep)
   let classElemClick = event.target.className;
   let idElenClick = event.target.id;
   if (activeStep) {
@@ -295,24 +153,12 @@ window.addEventListener('click', function clickChess(event) {
             check(chessArrBlack,chessArrWhite)
             check(chessArrWhite,chessArrBlack)
           }
-          // if (gameSetting.colorChess === 'white') {
-          //   chessArrWhite.forEach((item) => {
-          //     if (booleanCell) {
-          //       activeChess.xy = arrId
-          //     }
-          //   })
-          // } else {
-          //   chessArrBlack.forEach((item) => {
-          //     if (booleanCell) {
-          //       activeChess.xy = arrId
-          //     }
-          //   })
-          // }
+         
         }
     }
     if (classElemClick === 'chessImg') {   ///ход
       // let enemyXY;
-      if (gameSetting.colorChess === 'white') {
+      if (gameSetting.color === 'white') {
         chessArrBlack.forEach((item) => {
           if (idElenClick === item.name && activeStepArr.find((i)=>arraysAreEqual(i, item.xy))) {
             activeChess.xy = item.xy;
@@ -349,20 +195,14 @@ window.addEventListener('click', function clickChess(event) {
         })
         check(chessArrBlack,chessArrWhite)
       }
-      // if (activeStepArr.find((item)=>arraysAreEqual(item, enemyXY))) {
-
-      // }
-
-    } else {
+     
 
     }
-    // if (classElemClick === 'chessImg' && idElenClick.includes('King')) {  /// ход короля
-
-    // }
 
   } else {
-    if (classElemClick === 'chessImg' && idElenClick.includes(gameSetting.colorChess)) {
-      if (gameSetting.colorChess === 'white') {  ///белые
+    console.log(classElemClick === 'chessImg' && idElenClick.includes(gameSetting.color))
+    if (classElemClick === 'chessImg' && idElenClick.includes(gameSetting.color)) {
+      if (gameSetting.color === 'white') {  ///белые
         chessArrWhite.forEach((item) => {
           if (item.name === idElenClick && item.life === true) {
             activeChess = item;
@@ -389,11 +229,13 @@ window.addEventListener('click', function clickChess(event) {
   }
   // check(chessArrBlack,chessArrWhite)
   // check(chessArrWhite,chessArrBlack)
-})
+
+}
+
 
 function activeStepChess (event) {
-  if (classElemClick === 'chessImg' && idElenClick.includes(gameSetting.colorChess)) {
-      if (gameSetting.colorChess === 'white') {  ///белые
+  if (classElemClick === 'chessImg' && idElenClick.includes(gameSetting.color)) {
+      if (gameSetting.color === 'white') {  ///белые
         chessArrWhite.forEach((item) => {
           if (item.name === idElenClick && item.life === true) {
             activeChess = idElenClick;
@@ -439,15 +281,15 @@ function check (frend, enemy) {
 
 window.addEventListener('keypress', (e) => {
   if(e.key===' ') {
-    if (gameSetting.colorChess === 'white') {
-      gameSetting.colorChess = 'black'
+    if (gameSetting.color === 'white') {
+      gameSetting.color = 'black'
       
   } else {
-    gameSetting.colorChess = 'white'
+    gameSetting.color = 'white'
   }
 }
-  // console.log(gameSetting.colorChess)
+  // console.log(gameSetting.colorStep)
 })
 
 
-  export {clientTafel, heightTafel}
+  export {clientTafel, heightTafel, gameSetting}

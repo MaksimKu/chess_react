@@ -525,7 +525,7 @@ class blackKing extends superChess {
 }
 
 let chessArrWhite = [
-    new whitePawn(2,1,'whitePawnA', true, chessArrWhite),
+    new whitePawn(2,1,'whitePawnA', true),
     new whitePawn(2,2,'whitePawnB', true),
     new whitePawn(2,3,'whitePawnC', true),
     new whitePawn(2,4,'whitePawnD', true),
@@ -561,4 +561,7 @@ let chessArrBlack = [
     new blackKing(8,5,'blackKing', true)
 ]
 
+chessArrWhite[0].frend = chessArrWhite;
+chessArrWhite[0].frend[1].tuo = 99
+console.log(chessArrWhite[0].frend)
 export {chessArrWhite, chessArrBlack, arraysAreEqual}
