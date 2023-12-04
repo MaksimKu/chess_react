@@ -346,26 +346,34 @@ class whitePawn extends superChess {
         let oneStep = [this.xy[0] + 1, this.xy[1]];
         if (oneStep[0] <= 8) {
             if (!chessArrWhite.find(item=>item.life && arraysAreEqual(item.xy, oneStep))) {
-                if (!chessArrBlack.find(item=>item.life && arraysAreEqual(item.xy, oneStep)))
-                step.push(oneStep)
+                if (!chessArrBlack.find(item=>item.life && arraysAreEqual(item.xy, oneStep))) {
+                    step.push(oneStep)
+                    oneStep = [this.xy[0] + 2, this.xy[1]];
+                    if (this.firstStep === true) {
+                        if (!chessArrWhite.find(item=>item.life && arraysAreEqual(item.xy, oneStep))) {
+                            if (!chessArrBlack.find(item=>item.life && arraysAreEqual(item.xy, oneStep)))
+                            step.push(oneStep)
+                        }
+                    }
+                }
             }
         }
-        oneStep = [this.xy[0] + 2, this.xy[1]];
-        if (this.firstStep === true) {
-            if (!chessArrWhite.find(item=>item.life && arraysAreEqual(item.xy, oneStep))) {
-                if (!chessArrBlack.find(item=>item.life && arraysAreEqual(item.xy, oneStep)))
-                step.push(oneStep)
-            }
-        }
+        // oneStep = [this.xy[0] + 2, this.xy[1]];
+        // if (this.firstStep === true) {
+        //     if (!chessArrWhite.find(item=>item.life && arraysAreEqual(item.xy, oneStep))) {
+        //         if (!chessArrBlack.find(item=>item.life && arraysAreEqual(item.xy, oneStep)))
+        //         step.push(oneStep)
+        //     }
+        // }
         oneStep = [this.xy[0] + 1, this.xy[1] + 1];
-        if (oneStep[0] <= 8 && oneStep[1] <= 8 && oneStep[1] >= 1) {
+        if (oneStep[0] <= 8 && oneStep[1] <= 8) {
             if (chessArrBlack.find(item=>item.life && arraysAreEqual(item.xy, oneStep))) {
                 step.push(oneStep)
             }
 
         }
         oneStep = [this.xy[0] + 1, this.xy[1] - 1];
-        if (oneStep[0] <= 8 && oneStep[1] <= 8 && oneStep[1] >= 1) {
+        if (oneStep[0] <= 8 && oneStep[1] >= 1) {
             if (chessArrBlack.find(item=>item.life && arraysAreEqual(item.xy, oneStep))) {
                 step.push(oneStep)
             }
@@ -436,27 +444,36 @@ class blackPawn extends superChess {
     step() {
         let step = [];
         let oneStep = [this.xy[0] - 1, this.xy[1]];
-        if (oneStep[0] <= 8) {
+        if (oneStep[0] >= 1) {
             if (!chessArrBlack.find(item=> arraysAreEqual(item.xy, oneStep))) {
-                if (!chessArrWhite.find(item=> arraysAreEqual(item.xy, oneStep)))
+                if (!chessArrWhite.find(item=> arraysAreEqual(item.xy, oneStep))) {
                 step.push(oneStep)
+                console.log(oneStep)
+                oneStep = [this.xy[0] - 2, this.xy[1]];
+                if (this.firstStep === true && oneStep[0] >= 1) {
+                    if (!chessArrBlack.find(item=> arraysAreEqual(item.xy, oneStep))) {
+                        if (!chessArrWhite.find(item=> arraysAreEqual(item.xy, oneStep)))
+                        step.push(oneStep)
+                    }
+                }
+                }
             }
         }
-        oneStep = [this.xy[0] - 2, this.xy[1]];
-        if (this.firstStep === true) {
-            if (!chessArrBlack.find(item=> arraysAreEqual(item.xy, oneStep))) {
-                if (!chessArrWhite.find(item=> arraysAreEqual(item.xy, oneStep)))
-                step.push(oneStep)
-            }
-        }
+        // oneStep = [this.xy[0] - 2, this.xy[1]];
+        // if (this.firstStep === true) {
+        //     if (!chessArrBlack.find(item=> arraysAreEqual(item.xy, oneStep))) {
+        //         if (!chessArrWhite.find(item=> arraysAreEqual(item.xy, oneStep)))
+        //         step.push(oneStep)
+        //     }
+        // }
         oneStep = [this.xy[0] - 1, this.xy[1] + 1];
-        if (oneStep[0] <= 8 && oneStep[1] <= 8 && oneStep[1] >= 1) {
+        if (oneStep[0] >= 1 && oneStep[1] <= 8) {
             if (chessArrWhite.find(item=> arraysAreEqual(item.xy, oneStep))) {
                 step.push(oneStep)
             }
         }
         oneStep = [this.xy[0] - 1, this.xy[1] - 1];
-        if (oneStep[0] <= 8 && oneStep[1] <= 8 && oneStep[1] >= 1) {
+        if (oneStep[0] >= 1 && oneStep[1] >= 1) {
             if (chessArrWhite.find(item=> arraysAreEqual(item.xy, oneStep))) {
                 step.push(oneStep)
             }
