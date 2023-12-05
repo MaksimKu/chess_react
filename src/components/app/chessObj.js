@@ -591,7 +591,7 @@ createFrendEnemy(chessArrWhite, chessArrBlack)
 createFrendEnemy(chessArrBlack,chessArrWhite)
 
 function createPsevdoChess (psevdoWhite, psevdoBlack, white, black) {
-    psevdoWhite = [
+    w = [
         new whitePawn(white[0].xy[0],white[0].xy[1],white[0].name, white[0].life, false),
         new whitePawn(white[1].xy[0],white[1].xy[1],white[1].name, white[1].life, false),
         new whitePawn(white[2].xy[0],white[2].xy[1],white[2].name, white[2].life, false),
@@ -610,7 +610,7 @@ function createPsevdoChess (psevdoWhite, psevdoBlack, white, black) {
         new whiteKing(white[15].xy[0],white[15].xy[1],white[15].name, white[15].life, false)
     ];
     
-    psevdoBlack = [
+    b = [
         new blackPawn(black[0].xy[0],black[0].xy[1],black[0].name, black[0].life, false),
         new blackPawn(black[1].xy[0],black[1].xy[1],black[1].name, black[1].life, false),
         new blackPawn(black[2].xy[0],black[2].xy[1],black[2].name, black[2].life, false),
@@ -628,8 +628,7 @@ function createPsevdoChess (psevdoWhite, psevdoBlack, white, black) {
         new blackFerz(black[14].xy[0],black[14].xy[1],black[14].name, black[14].life, false),
         new blackKing(black[15].xy[0],black[15].xy[1],black[15].name, black[15].life, false)
     ];
-    createFrendEnemy(psevdoBlack,psevdoWhite);
-    createFrendEnemy(psevdoWhite,psevdoBlack);
+    
     for (let i = 0; i < 8; i++) {
         if(!psevdoWhite[i].name.includes('Pawn')) {
             psevdoWhite[i].step = psevdoWhite[14].step;
@@ -640,8 +639,11 @@ function createPsevdoChess (psevdoWhite, psevdoBlack, white, black) {
             psevdoBlack[i].stepKill = psevdoBlack[14].stepKill
         }
     }
-    psevdoWhite = 5
-    console.log(psevdoWhite)
+    w.forEach((item)=> psevdoWhite.push(item))
+    b.forEach((item)=> psevdoBlack.push(item))
+    createFrendEnemy(psevdoBlack,psevdoWhite);
+    createFrendEnemy(psevdoWhite,psevdoBlack);
+    
 }
 
 
