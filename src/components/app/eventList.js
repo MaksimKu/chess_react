@@ -1,4 +1,4 @@
-import {chessArrWhite, chessArrBlack, arraysAreEqual} from './chessObj.js';
+import {chessArrWhite, chessArrBlack, arraysAreEqual, createPsevdoChess} from './chessObj.js';
 
 let clientTafel = {
     height: document.documentElement.clientHeight,
@@ -28,6 +28,11 @@ let clientTafel = {
       } else {
         document.querySelector('.wrapper').style.rotate = '0deg';
         document.querySelectorAll('.chessImg').forEach((item) => item.style.rotate = '0deg')
+        // let ion = [];
+        // let j;
+        // createPsevdoChess(ion,j,chessArrWhite,chessArrBlack);
+        // console.log(ion)
+        
       }
       this._color = item
     }
