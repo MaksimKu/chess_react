@@ -168,6 +168,7 @@ function clickChess(event) {
           if (idElenClick === item.name && activeStepArr.find((i)=>arraysAreEqual(i, item.xy))) {
             activeChess.xy = item.xy;
             item.life = false
+            
           }
         })
         chessArrWhite.forEach((item) => {
