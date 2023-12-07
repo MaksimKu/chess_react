@@ -40,7 +40,7 @@ class superChess {
         if(this.name.includes('Pawn')) {
             if(this.name.includes('white')) {
                 if (x === 8) {
-                    console.log(document.getElementById(`${this.name}`))
+                    // console.log(document.getElementById(`${this.name}`))
                     document.getElementById(`${this.name}`).src = ferzWhite;
                     document.getElementById(`${this.name}`).id = 'whiteFerz' + ferzNumber;
                     this.name = `${'whiteFerz' + ferzNumber}`;
@@ -62,11 +62,9 @@ class superChess {
         }
         if(this.name.includes('King')) {
                 if (this.firstStep === true && y === 3) {
-                    console.log()
                     this.frend[8].xy = [x,y+1]
                 }
                 if (this.firstStep === true && y === 7) {
-                    console.log()
                     this.frend[9].xy = [x,y-1]
                 }
         }
@@ -283,31 +281,25 @@ function stepKing (frend, enemy, chess, kill) {
                 [chess.xy[0], chess.xy[1] + 1],[chess.xy[0], chess.xy[1] + 2]];
                 frend.forEach((item) => {
                     if (item.life === true) {
-                        console.log(arraysAreEqual(item.xy, cellArr[0]) || arraysAreEqual(item.xy, cellArr[1]) || 
-                        arraysAreEqual(item.xy, cellArr[2]))
                         if(arraysAreEqual(item.xy, cellArr[0]) || arraysAreEqual(item.xy, cellArr[1]) || 
                         arraysAreEqual(item.xy, cellArr[2])) {
                             chessBool = false;
-                            console.log('gg')
                         }
                     }
                 })
                 enemy.forEach((item) => {
                     if (item.life === true) {
-                        console.log(arraysAreEqual(item.xy, cellArr[0]) || arraysAreEqual(item.xy, cellArr[1]) || 
-                        arraysAreEqual(item.xy, cellArr[2]))
                         if(arraysAreEqual(item.xy, cellArr[0]) || arraysAreEqual(item.xy, cellArr[1]) || 
                         arraysAreEqual(item.xy, cellArr[2])) {
                             chessBool = false;
-                            console.log('gg')
                         }
                     }
                 })
                 
                 if (chessBool === true) {
-                    console.log(chess.xy)
+
                     step = [chess.xy[0], chess.xy[1] - 2];
-                    console.log(step)
+
                     arr()
                 }
                 chessBool = true;
@@ -316,24 +308,23 @@ function stepKing (frend, enemy, chess, kill) {
                         // console.log(arraysAreEqual(item.xy, cellArr[3]) || arraysAreEqual(item.xy, cellArr[4]))
                         if(arraysAreEqual(item.xy, cellArr[3]) || arraysAreEqual(item.xy, cellArr[4])) {
                             chessBool = false;
-                            console.log('gg')
+
                         }
                     }
                 })
                 enemy.forEach((item) => {
                     if (item.life === true) {
-                        console.log(arraysAreEqual(item.xy, cellArr[0]) || arraysAreEqual(item.xy, cellArr[1]) || 
-                        arraysAreEqual(item.xy, cellArr[2]))
+                      
                         if(arraysAreEqual(item.xy, cellArr[3]) || arraysAreEqual(item.xy, cellArr[4])) {
                             chessBool = false;
-                            console.log('gg')
+
                         }
                     }
                 })
                 if (chessBool === true) {
-                    console.log(chess.xy)
+   
                     step = [chess.xy[0], chess.xy[1] + 2];
-                    console.log(step)
+
                     arr()
                 }
             }
@@ -444,7 +435,7 @@ class blackPawn extends superChess {
             if (!this.frend.find(item=> arraysAreEqual(item.xy, oneStep))) {
                 if (!this.enemy.find(item=> arraysAreEqual(item.xy, oneStep))) {
                 step.push(oneStep)
-                console.log(oneStep)
+
                 oneStep = [this.xy[0] - 2, this.xy[1]];
                 if (this.firstStep === true && oneStep[0] >= 1) {
                     if (!this.frend.find(item=> arraysAreEqual(item.xy, oneStep))) {
@@ -578,41 +569,41 @@ createFrendEnemy(chessArrBlack,chessArrWhite)
 
 function createPsevdoChess (psevdoWhite, psevdoBlack, white, black, psevdoHistory) {
     let w = [
-        new whitePawn(white[0].xy[0],white[0].xy[1],white[0].name, white[0].life, false, psevdoHistory),
-        new whitePawn(white[1].xy[0],white[1].xy[1],white[1].name, white[1].life, false, psevdoHistory),
-        new whitePawn(white[2].xy[0],white[2].xy[1],white[2].name, white[2].life, false, psevdoHistory),
-        new whitePawn(white[3].xy[0],white[3].xy[1],white[3].name, white[3].life, false, psevdoHistory),
-        new whitePawn(white[4].xy[0],white[4].xy[1],white[4].name, white[4].life, false, psevdoHistory),
-        new whitePawn(white[5].xy[0],white[5].xy[1],white[5].name, white[5].life, false, psevdoHistory),
-        new whitePawn(white[6].xy[0],white[6].xy[1],white[6].name, white[6].life, false, psevdoHistory),
-        new whitePawn(white[7].xy[0],white[7].xy[1],white[7].name, white[7].life, false, psevdoHistory),
-        new whiteRock(white[8].xy[0],white[8].xy[1],white[8].name, white[8].life, false, psevdoHistory),
-        new whiteRock(white[9].xy[0],white[9].xy[1],white[9].name, white[9].life, false, psevdoHistory),
-        new whiteHorse(white[10].xy[0],white[10].xy[1],white[10].name, white[10].life, false, psevdoHistory),
-        new whiteHorse(white[11].xy[0],white[11].xy[1],white[11].name, white[11].life, false, psevdoHistory),
-        new whiteOfficer(white[12].xy[0],white[12].xy[1],white[12].name, white[12].life, false, psevdoHistory),
-        new whiteOfficer(white[13].xy[0],white[13].xy[1],white[13].name, white[13].life, false, psevdoHistory),
-        new whiteFerz(white[14].xy[0],white[14].xy[1],white[14].name, white[14].life, false, psevdoHistory),
-        new whiteKing(white[15].xy[0],white[15].xy[1],white[15].name, white[15].life, false, psevdoHistory)
+        new whitePawn(white[0].xy[0],white[0].xy[1],white[0].name, white[0].life, false, psevdoHistory,2),
+        new whitePawn(white[1].xy[0],white[1].xy[1],white[1].name, white[1].life, false, psevdoHistory,2),
+        new whitePawn(white[2].xy[0],white[2].xy[1],white[2].name, white[2].life, false, psevdoHistory,2),
+        new whitePawn(white[3].xy[0],white[3].xy[1],white[3].name, white[3].life, false, psevdoHistory,2),
+        new whitePawn(white[4].xy[0],white[4].xy[1],white[4].name, white[4].life, false, psevdoHistory,2),
+        new whitePawn(white[5].xy[0],white[5].xy[1],white[5].name, white[5].life, false, psevdoHistory,2),
+        new whitePawn(white[6].xy[0],white[6].xy[1],white[6].name, white[6].life, false, psevdoHistory,2),
+        new whitePawn(white[7].xy[0],white[7].xy[1],white[7].name, white[7].life, false, psevdoHistory,2),
+        new whiteRock(white[8].xy[0],white[8].xy[1],white[8].name, white[8].life, false, psevdoHistory,10),
+        new whiteRock(white[9].xy[0],white[9].xy[1],white[9].name, white[9].life, false, psevdoHistory,10),
+        new whiteHorse(white[10].xy[0],white[10].xy[1],white[10].name, white[10].life, false, psevdoHistory,6),
+        new whiteHorse(white[11].xy[0],white[11].xy[1],white[11].name, white[11].life, false, psevdoHistory,6),
+        new whiteOfficer(white[12].xy[0],white[12].xy[1],white[12].name, white[12].life, false, psevdoHistory,6),
+        new whiteOfficer(white[13].xy[0],white[13].xy[1],white[13].name, white[13].life, false, psevdoHistory,6),
+        new whiteFerz(white[14].xy[0],white[14].xy[1],white[14].name, white[14].life, false, psevdoHistory,18),
+        new whiteKing(white[15].xy[0],white[15].xy[1],white[15].name, white[15].life, false, psevdoHistory,100)
     ];
     
     let b = [
-        new blackPawn(black[0].xy[0],black[0].xy[1],black[0].name, black[0].life, false, psevdoHistory),
-        new blackPawn(black[1].xy[0],black[1].xy[1],black[1].name, black[1].life, false, psevdoHistory),
-        new blackPawn(black[2].xy[0],black[2].xy[1],black[2].name, black[2].life, false, psevdoHistory),
-        new blackPawn(black[3].xy[0],black[3].xy[1],black[3].name, black[3].life, false, psevdoHistory),
-        new blackPawn(black[4].xy[0],black[4].xy[1],black[4].name, black[4].life, false, psevdoHistory),
-        new blackPawn(black[5].xy[0],black[5].xy[1],black[5].name, black[5].life, false, psevdoHistory),
-        new blackPawn(black[6].xy[0],black[6].xy[1],black[6].name, black[6].life, false, psevdoHistory),
-        new blackPawn(black[7].xy[0],black[7].xy[1],black[7].name, black[7].life, false, psevdoHistory),
-        new blackRock(black[8].xy[0],black[8].xy[1],black[8].name, black[8].life, false, psevdoHistory),
-        new blackRock(black[9].xy[0],black[9].xy[1],black[9].name, black[9].life, false, psevdoHistory),
-        new blackHorse(black[10].xy[0],black[10].xy[1],black[10].name, black[10].life, false, psevdoHistory),
-        new blackHorse(black[11].xy[0],black[11].xy[1],black[11].name, black[11].life, false, psevdoHistory),
-        new blackOfficer(black[12].xy[0],black[12].xy[1],black[12].name, black[12].life, false, psevdoHistory),
-        new blackOfficer(black[13].xy[0],black[13].xy[1],black[13].name, black[13].life, false, psevdoHistory),
-        new blackFerz(black[14].xy[0],black[14].xy[1],black[14].name, black[14].life, false, psevdoHistory),
-        new blackKing(black[15].xy[0],black[15].xy[1],black[15].name, black[15].life, false, psevdoHistory)
+        new blackPawn(black[0].xy[0],black[0].xy[1],black[0].name, black[0].life, false, psevdoHistory,2),
+        new blackPawn(black[1].xy[0],black[1].xy[1],black[1].name, black[1].life, false, psevdoHistory,2),
+        new blackPawn(black[2].xy[0],black[2].xy[1],black[2].name, black[2].life, false, psevdoHistory,2),
+        new blackPawn(black[3].xy[0],black[3].xy[1],black[3].name, black[3].life, false, psevdoHistory,2),
+        new blackPawn(black[4].xy[0],black[4].xy[1],black[4].name, black[4].life, false, psevdoHistory,2),
+        new blackPawn(black[5].xy[0],black[5].xy[1],black[5].name, black[5].life, false, psevdoHistory,2),
+        new blackPawn(black[6].xy[0],black[6].xy[1],black[6].name, black[6].life, false, psevdoHistory,2),
+        new blackPawn(black[7].xy[0],black[7].xy[1],black[7].name, black[7].life, false, psevdoHistory,2),
+        new blackRock(black[8].xy[0],black[8].xy[1],black[8].name, black[8].life, false, psevdoHistory,10),
+        new blackRock(black[9].xy[0],black[9].xy[1],black[9].name, black[9].life, false, psevdoHistory,10),
+        new blackHorse(black[10].xy[0],black[10].xy[1],black[10].name, black[10].life, false, psevdoHistory,6),
+        new blackHorse(black[11].xy[0],black[11].xy[1],black[11].name, black[11].life, false, psevdoHistory,6),
+        new blackOfficer(black[12].xy[0],black[12].xy[1],black[12].name, black[12].life, false, psevdoHistory,6),
+        new blackOfficer(black[13].xy[0],black[13].xy[1],black[13].name, black[13].life, false, psevdoHistory,6),
+        new blackFerz(black[14].xy[0],black[14].xy[1],black[14].name, black[14].life, false, psevdoHistory,18),
+        new blackKing(black[15].xy[0],black[15].xy[1],black[15].name, black[15].life, false, psevdoHistory,100)
     ];
     
     for (let i = 0; i < 8; i++) {
@@ -635,11 +626,12 @@ function createPsevdoChess (psevdoWhite, psevdoBlack, white, black, psevdoHistor
 function foo(freend, enemy) {
 let stepArr = [];
     freend.forEach((item, index) => {
+        if(item.life === true)
         item.step().forEach((itemStep) => {
             let step = [item.xy,itemStep,0]
             let bestEnemyStep = 0
             enemy.forEach(itemEnemy=>{
-                if (arraysAreEqual(itemEnemy.xy, itemStep)) {
+                if (arraysAreEqual(itemEnemy.xy, itemStep) && itemEnemy.life === true) {
                     step[2] = step[2] + itemEnemy.price
                 }
             })
@@ -647,39 +639,73 @@ let stepArr = [];
             let psevdoEnemy = [];
             let psevdoHistory = [];
             createPsevdoChess(psevdoFrend,psevdoEnemy,freend,enemy,psevdoHistory);
-            psevdoFrend[index] = itemStep;
+            psevdoFrend[index].xy = itemStep;
+// console.log(psevdoFrend[0].step())
+
+            psevdoEnemy.forEach((itemPsevdoEnemy)=>{
+                if(itemPsevdoEnemy.life === true)
+                itemPsevdoEnemy.step().forEach((itemPsevdoEnemyStep)=>{
+                    psevdoFrend.forEach((itemPsevdoFrend)=> {
+                        if (arraysAreEqual(itemPsevdoFrend.xy, itemPsevdoEnemyStep) && bestEnemyStep < itemPsevdoFrend.price && itemPsevdoFrend.life ===true) {
+                            bestEnemyStep = itemPsevdoFrend.price
+                        }
+                        // console.log(itemPsevdoEnemyStep,itemPsevdoFrend)
+                    })
+                })
+            })
+            step[2] = step[2] - bestEnemyStep;
 
 
-            // psevdoEnemy.forEach((itemPsevdoEnemy)=>{
-            //     itemPsevdoEnemy.step().forEach((itemPsevdoEnemyStep)=>{
-            //         psevdoFrend.forEach((itemPsevdoFrend)=> {
-            //             if (arraysAreEqual(itemPsevdoFrend.xy, itemPsevdoEnemyStep) && bestEnemyStep < itemPsevdoFrend.price) {
-            //                 bestEnemyStep = itemPsevdoFrend.price
-            //             }
-            //         })
-            //     })
-            // })
-            // step[2] = step[2] - bestEnemyStep;
-
-            
             stepArr.push(step)
         })
     })
 
     stepArr.sort((a,b) => {
-        if (a[2] > b[2]) return 1;
+        if (a[2] > b[2]) return -1;
         if (a[2] == b[2]) return 0;
-        if (a[2] < b[2]) return -1;
+        if (a[2] < b[2]) return 1;
     })
+    // console.log(stepArr)
     return stepArr[0]
+}
+let obj = {
+    _i: true,
+    set i(a) {
+        if (a === true) {
+            let step = foo(chessArrBlack,chessArrWhite)
+            console.log(step)
+            chessArrBlack.forEach((item) => {
+                if (arraysAreEqual(step[0], item.xy)) {
+                    item.xy = step[1]
+                }
+            })
+        } else {
+            let step = foo(chessArrWhite,chessArrBlack)
+            console.log(step)
+            chessArrWhite.forEach((item) => {
+                if (arraysAreEqual(step[0], item.xy)) {
+                    item.xy = step[1]
+                }
+            })
+        }
+        this._i = a
+    },
+    get i() {return this._i}
 }
 window.addEventListener('keypress', (e) => {
     if(e.key==='q') {
-        console.log(foo(chessArrWhite,chessArrBlack))
+        let step = foo(chessArrBlack,chessArrWhite)
+        console.log(step)
+        chessArrBlack.forEach((item) => {
+            if (arraysAreEqual(step[0], item.xy)) {
+                item.xy = step[1]
+            }
+        })
+        // obj.i = !obj.i
     }
 })
 
 
 
 
-export {chessArrWhite, chessArrBlack, arraysAreEqual, createPsevdoChess}
+export {chessArrWhite, chessArrBlack, arraysAreEqual, createPsevdoChess, foo}
