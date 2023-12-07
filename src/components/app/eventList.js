@@ -1,4 +1,4 @@
-import {chessArrWhite, chessArrBlack, arraysAreEqual} from './chessObj.js';
+import {chessArrWhite, chessArrBlack, arraysAreEqual, foo} from './chessObj.js';
 
 let clientTafel = {
     height: document.documentElement.clientHeight,
@@ -28,6 +28,11 @@ let clientTafel = {
       } else {
         document.querySelector('.wrapper').style.rotate = '0deg';
         document.querySelectorAll('.chessImg').forEach((item) => item.style.rotate = '0deg')
+        // let ion = [];
+        // let j;
+        // createPsevdoChess(ion,j,chessArrWhite,chessArrBlack);
+        // console.log(ion)
+        
       }
       this._color = item
     }
@@ -35,11 +40,27 @@ let clientTafel = {
       return this._colorStep
     }
     set colorStep(item) {
-      if (this.color === 'white') {
+      if (this.color === item) {
         window.addEventListener('click',clickChess)
       } else {
-        window.removeEventListener('click',clickChess)
+        if (this.color === 'white') {
+        let step = foo(chessArrBlack,chessArrWhite)
+        console.log(step)
+        chessArrBlack.forEach((item) => {
+            if (arraysAreEqual(step[0], item.xy)) {
+                item.xy = step[1]
+            }
+        })
+      } else {
+      let step = foo(chessArrWhite,chessArrBlack)
+        console.log(step)
+        chessArrWhite.forEach((item) => {
+            if (arraysAreEqual(step[0], item.xy)) {
+                item.xy = step[1]
+            }
+        })
       }
+    }
       this._colorStep = item
     }
   }
@@ -150,6 +171,11 @@ function clickChess(event) {
           })
           if (booleanCell) {
             activeChess.xy = arrId
+            if (activeChess.name.includes('white')) {
+              gameSetting.colorStep = 'black'
+            } else {
+              gameSetting.colorStep = 'white'
+            }
             check(chessArrBlack,chessArrWhite)
             check(chessArrWhite,chessArrBlack)
           }
@@ -163,6 +189,8 @@ function clickChess(event) {
           if (idElenClick === item.name && activeStepArr.find((i)=>arraysAreEqual(i, item.xy))) {
             activeChess.xy = item.xy;
             item.life = false
+            gameSetting.colorStep = 'black'
+            
           }
         })
         chessArrWhite.forEach((item) => {
@@ -181,6 +209,7 @@ function clickChess(event) {
           if (idElenClick === item.name && activeStepArr.find((i)=>arraysAreEqual(i, item.xy))) {
             activeChess.xy = item.xy;
             item.life = false
+            gameSetting.colorStep = 'white'
           }
         })
         chessArrBlack.forEach((item) => {
@@ -227,6 +256,7 @@ function clickChess(event) {
       }
     }
   }
+ 
   // check(chessArrBlack,chessArrWhite)
   // check(chessArrWhite,chessArrBlack)
 
