@@ -692,18 +692,18 @@ let obj = {
     },
     get i() {return this._i}
 }
-window.addEventListener('keypress', (e) => {
-    if(e.key==='q') {
-        let step = foo(chessArrBlack,chessArrWhite)
-        console.log(step)
-        chessArrBlack.forEach((item) => {
-            if (arraysAreEqual(step[0], item.xy)) {
-                item.xy = step[1]
-            }
-        })
-        // obj.i = !obj.i
-    }
-})
+// window.addEventListener('keypress', (e) => {
+//     if(e.key==='q') {
+//         let step = foo(chessArrBlack,chessArrWhite)
+//         console.log(step)
+//         chessArrBlack.forEach((item) => {
+//             if (arraysAreEqual(step[0], item.xy)) {
+//                 item.xy = step[1]
+//             }
+//         })
+//         // obj.i = !obj.i
+//     }
+// })
 
 
 
