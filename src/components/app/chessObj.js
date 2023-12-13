@@ -40,23 +40,23 @@ class superChess {
         if(this.name.includes('Pawn')) {
             if(this.name.includes('white')) {
                 if (x === 8) {
-                    // console.log(document.getElementById(`${this.name}`))
                     document.getElementById(`${this.name}`).src = ferzWhite;
-                    document.getElementById(`${this.name}`).id = 'whiteFerz' + ferzNumber;
-                    this.name = `${'whiteFerz' + ferzNumber}`;
-                    ferzNumber++
                     this.step = chessArrWhite[14].step;
                     this.stepKill = chessArrWhite[14].stepKill
 
                 }
             } else {
-                if (x === 1) {
-                    document.getElementById(`${this.name}`).src = ferzBlack;
-                    document.getElementById(`${this.name}`).id = 'blackFerz' + ferzNumber;
-                    this.name = `${'blackFerz' + ferzNumber}`;
-                    ferzNumber++
+                if (x === 1) {  
+                    // console.log( document.getElementById(`${this.name}`))
+                    console.log(this.name)
+                    let id = this.name;
+                    document.getElementById(`${id}`).src = ferzBlack;
                     this.step = chessArrBlack[14].step;
-                    this.stepKill = chessArrBlack[14].stepKill
+                    this.stepKill = chessArrBlack[14].stepKill;
+                    document.getElementById(`${this.name}`).id = '1';
+                    this.name = '1';
+                    console.log(this.name)
+                    console.log(document.getElementById(`${this.name}`))
                 }
             }
         }
@@ -668,42 +668,35 @@ let stepArr = [];
     // console.log(stepArr)
     return stepArr[0]
 }
-let obj = {
-    _i: true,
-    set i(a) {
-        if (a === true) {
-            let step = foo(chessArrBlack,chessArrWhite)
-            console.log(step)
-            chessArrBlack.forEach((item) => {
-                if (arraysAreEqual(step[0], item.xy)) {
-                    item.xy = step[1]
-                }
-            })
-        } else {
-            let step = foo(chessArrWhite,chessArrBlack)
-            console.log(step)
-            chessArrWhite.forEach((item) => {
-                if (arraysAreEqual(step[0], item.xy)) {
-                    item.xy = step[1]
-                }
-            })
-        }
-        this._i = a
-    },
-    get i() {return this._i}
-}
-// window.addEventListener('keypress', (e) => {
-//     if(e.key==='q') {
-//         let step = foo(chessArrBlack,chessArrWhite)
-//         console.log(step)
-//         chessArrBlack.forEach((item) => {
-//             if (arraysAreEqual(step[0], item.xy)) {
-//                 item.xy = step[1]
-//             }
-//         })
-//         // obj.i = !obj.i
-//     }
-// })
+// let obj = {
+//     _i: true,
+//     set i(a) {
+//         if (a === true) {
+//             let step = foo(chessArrBlack,chessArrWhite)
+//             console.log(step)
+//             chessArrBlack.forEach((item) => {
+//                 if (arraysAreEqual(step[0], item.xy)) {
+//                     item.xy = step[1]
+//                 }
+//             })
+//         } else {
+//             let step = foo(chessArrWhite,chessArrBlack)
+//             console.log(step)
+//             chessArrWhite.forEach((item) => {
+//                 if (arraysAreEqual(step[0], item.xy)) {
+//                     item.xy = step[1]
+//                 }
+//             })
+//         }
+//         this._i = a
+//     },
+//     get i() {return this._i}
+// }
+window.addEventListener('keypress', (e) => {
+    if(e.key==='q') {
+        console.log(ferzBlack)
+    }
+})
 
 
 
