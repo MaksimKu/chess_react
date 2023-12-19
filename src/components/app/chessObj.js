@@ -57,6 +57,7 @@ class superChess {
                     this.name = '1';
                     console.log(this.name)
                     console.log(document.getElementById(`${this.name}`))
+                    console.log(586)
                 }
             }
         }
