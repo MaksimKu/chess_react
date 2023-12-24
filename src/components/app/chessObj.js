@@ -47,17 +47,15 @@ class superChess {
                 }
             } else {
                 if (x === 1) {  
-                    // console.log( document.getElementById(`${this.name}`))
-                    console.log(this.name)
-                    let id = this.name;
-                    document.getElementById(`${id}`).src = ferzBlack;
+                    document.getElementById(`${this.name}`).src = ferzBlack;
                     this.step = chessArrBlack[14].step;
-                    this.stepKill = chessArrBlack[14].stepKill;
-                    document.getElementById(`${this.name}`).id = '1';
-                    this.name = '1';
-                    console.log(this.name)
-                    console.log(document.getElementById(`${this.name}`))
-                    console.log(586)
+                    this.stepKill = chessArrBlack[14].stepKill
+                    // let id = this.name;
+                    // document.getElementById(`${id}`).src = ferzBlack;
+                    // this.step = chessArrBlack[14].step;
+                    // this.stepKill = chessArrBlack[14].stepKill;
+                    // document.getElementById(`${this.name}`).id = '1';
+                    // this.name = '1';
                 }
             }
         }
@@ -693,6 +691,17 @@ let stepArr = [];
 //     },
 //     get i() {return this._i}
 // }
+
+function checkStep (frend, enemy) {
+    let arrFrendStep = new Set()
+    enemy.forEach((item) => {
+        if (item.life)
+        item.stepKill().forEach(i=>arrFrendStep.add(i.toString()))
+    })
+    
+}
+
+
 window.addEventListener('keypress', (e) => {
     if(e.key==='q') {
         console.log(ferzBlack)
