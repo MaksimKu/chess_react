@@ -299,10 +299,18 @@ function check (frend, enemy) {
         })
   if (arrFrendStep.has(enemy[15].xy.toString())) {
     alert('шах');
+    
+    let mat = false
+    for (let i=0; i<enemy.length; i++) {
+      let stepAr = item.step()
+      for (let itemStep of stepAr) {
+        let psevdoFrend = []
+        let psevdoEnemy = []
+        let psevdoHistory = []
+        createPsevdoChess(psevdoFrend,psevdoEnemy,frend,enemy,psevdoHistory)
 
-    // for (let item of enemy) {
-
-    // }
+      }
+    }
   }
   // for (let item of frend) {
 
