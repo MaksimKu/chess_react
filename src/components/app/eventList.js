@@ -308,7 +308,7 @@ function check (frend, enemy) {
         let psevdoEnemy = []
         let psevdoHistory = []
         createPsevdoChess(psevdoFrend,psevdoEnemy,frend,enemy,psevdoHistory)
-
+        console.log(55)
       }
     }
   }
