@@ -40,14 +40,19 @@ class superChess {
         if(this.name.includes('Pawn')) {
             if(this.name.includes('white')) {
                 if (x === 8) {
+                    if (this.origin === true) {
                     document.getElementById(`${this.name}`).src = ferzWhite;
+                    }
                     this.step = chessArrWhite[14].step;
                     this.stepKill = chessArrWhite[14].stepKill
 
                 }
             } else {
-                if (x === 1) {  
+                // console.log(x)
+                if (x === 1) { 
+                    if (this.origin === true) {
                     document.getElementById(`${this.name}`).src = ferzBlack;
+                    }
                     this.step = chessArrBlack[14].step;
                     this.stepKill = chessArrBlack[14].stepKill
                     // let id = this.name;
