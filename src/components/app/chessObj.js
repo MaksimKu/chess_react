@@ -9,6 +9,47 @@ function arraysAreEqual(a, b) {
     }
     return true;
 }
+function check (frend, enemy) {
+    let arrFrendStep = new Set()
+          frend.forEach((item) => {
+              if (item.life)
+              item.stepKill().forEach(i=>arrFrendStep.add(i.toString()))
+          })
+    if (arrFrendStep.has(enemy[15].xy.toString())) {
+      console.log('chach')
+      
+      let mat = false
+      for (let i=0; i<enemy.length; i++) {
+        let stepAr = enemy[i].step()
+        for (let j=0; j<stepAr.length; j++) {
+          let psevdoFrend = []
+          let psevdoEnemy = []
+          let psevdoHistory = []
+          createPsevdoChess(psevdoFrend,psevdoEnemy,frend,enemy,psevdoHistory)
+          psevdoEnemy[i].xy = stepAr[j]
+          let psevdoFrendStep = new Set()
+          psevdoFrend.forEach((item) => {
+              if (item.life)
+              item.stepKill().forEach(i=>psevdoFrendStep.add(i.toString()))
+          })
+          if (psevdoFrendStep.has(psevdoEnemy[15].xy.toString())) {
+            if(mat === false) {
+              mat = true
+            }
+            // console.log(chessArrBlack[0])
+          }
+          // console.log(psevdoFrend)
+        }
+      }
+      if (mat === true) {
+        console.log('mat')
+        alert('mat')
+      }
+    }
+    // for (let item of frend) {
+  
+    // }
+  }
 var ferzNumber = 2;
 let stepHistory = []
 class superChess {
@@ -31,6 +72,7 @@ class superChess {
         if (this.origin === true) {
         document.getElementById(`${this.name}`).style.left=`${(this.xy[1] * 10.7) - 10.7}vmin`;
         document.getElementById(`${this.name}`).style.top=`${(this.xy[0] * 10.7) - 8.7}vmin`;
+        check(this.frend, this.enemy)
         }
         this.enemy.forEach((item)=> {
             if (arraysAreEqual(item.xy,[x,y])) {

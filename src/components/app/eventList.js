@@ -45,7 +45,7 @@ let clientTafel = {
       } else {
         if (this.color === 'white') {
         let step = foo(chessArrBlack,chessArrWhite)
-        console.log(step)
+        // console.log(step)
         chessArrBlack.forEach((item) => {
             if (arraysAreEqual(step[0], item.xy)) {
                 item.xy = step[1]
@@ -229,7 +229,7 @@ function clickChess(event) {
     }
 
   } else {
-    console.log(classElemClick === 'chessImg' && idElenClick.includes(gameSetting.color))
+    // console.log(classElemClick === 'chessImg' && idElenClick.includes(gameSetting.color))
     if (classElemClick === 'chessImg' && idElenClick.includes(gameSetting.color)) {
       if (gameSetting.color === 'white') {  ///белые
         chessArrWhite.forEach((item) => {
@@ -325,7 +325,7 @@ function check (frend, enemy) {
     }
     if (mat === true) {
       console.log('mat')
-      console.log(chessArrBlack)
+      alert('mat')
     }
   }
   // for (let item of frend) {
