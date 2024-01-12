@@ -75,7 +75,7 @@ class superChess {
         if (this.origin === true) {
         document.getElementById(`${this.name}`).style.left=`${(this.xy[1] * 10.7) - 10.7}vmin`;
         document.getElementById(`${this.name}`).style.top=`${(this.xy[0] * 10.7) - 8.7}vmin`;
-        check(this.frend, this.enemy)
+        // check(this.frend, this.enemy)
         }
         this.enemy.forEach((item)=> {
             if (arraysAreEqual(item.xy,[x,y])) {
@@ -754,4 +754,4 @@ window.addEventListener('keypress', (e) => {
 
 
 
-export {chessArrWhite, chessArrBlack, arraysAreEqual, createPsevdoChess, foo}
+export {chessArrWhite, chessArrBlack, arraysAreEqual, createPsevdoChess, foo, check}

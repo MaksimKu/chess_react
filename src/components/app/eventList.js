@@ -1,4 +1,4 @@
-import {chessArrWhite, chessArrBlack, arraysAreEqual, foo, createPsevdoChess} from './chessObj.js';
+import {chessArrWhite, chessArrBlack, arraysAreEqual, foo, createPsevdoChess, check} from './chessObj.js';
 
 let clientTafel = {
     height: document.documentElement.clientHeight,
@@ -51,6 +51,7 @@ let clientTafel = {
                 item.xy = step[1]
             }
         })
+        check(chessArrBlack, chessArrWhite)
       } else {
       let step = foo(chessArrWhite,chessArrBlack)
         console.log(step)
@@ -59,6 +60,7 @@ let clientTafel = {
                 item.xy = step[1]
             }
         })
+        check(chessArrWhite,chessArrBlack)
       }
     }
       this._colorStep = item
