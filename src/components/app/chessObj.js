@@ -18,39 +18,46 @@ function check (frend, enemy) {
     if (arrFrendStep.has(enemy[15].xy.toString())) {
       console.log('chach')
       
-      let mat = false
-      outher: for (let i=0; i<enemy.length; i++) {
-        // console.log(enemy[i])
-        if (enemy[i].life === true) {
-            let stepAr = enemy[i].step()
-            console.log(enemy[i].name , stepAr)
-            for (let j=0; j<stepAr.length; j++) {
-                let psevdoFrend = []
-                let psevdoEnemy = []
-                let psevdoHistory = []
-                createPsevdoChess(psevdoFrend,psevdoEnemy,frend,enemy,psevdoHistory)
-                psevdoEnemy[i].xy = stepAr[j]
-                let psevdoFrendStep = new Set()
-                psevdoFrend.forEach((item) => {
-                    if (item.life)
-                    item.stepKill().forEach(i=>psevdoFrendStep.add(i.toString()))
-                })
-                // console.log(psevdoEnemy[15].xy)
-                // if (psevdoFrendStep.has(psevdoEnemy[15].xy.toString()) === false) {
-                //     // if (mat === false) {
-                //     //     mat = true;
-                //     //     console.log(mat)
-                //     //     break outher;
-                //     // }
-                //     console.log('gg')
-                // }
-            }
-        }
-      }
-      if (mat === false) {
-        console.log('mat')
-        alert('mat')
-      }
+    //   let mat = false
+    //   outher: for (let i=0; i<enemy.length; i++) {
+    //     // console.log(enemy[i])
+    //     if (enemy[i].life === true) {
+    //         let stepAr = enemy[i].step()
+    //         console.log(enemy[i].name , stepAr)
+    //         for (let j=0; j<stepAr.length; j++) {
+    //             let psevdoFrend = []
+    //             let psevdoEnemy = []
+    //             let psevdoHistory = []
+    //             createPsevdoChess(psevdoFrend,psevdoEnemy,enemy,frend,psevdoHistory)
+    //             psevdoEnemy[i].xy = stepAr[j]
+    //             let psevdoFrendStep = new Set()
+    //             psevdoEnemy.forEach((item) => {
+    //                 if (item.life)
+    //                 item.stepKill().forEach(i=>psevdoFrendStep.add(i.toString()))
+    //             // console.log(item.stepKill(), item.name)
+    //             })
+    //             // console.log(psevdoFrend[15])
+    //             if (psevdoFrendStep.has(psevdoEnemy[15].xy.toString()) === false) {
+    //                 // if (mat === false) {
+    //                 //     mat = true;
+    //                 //     console.log(mat)
+    //                 //     break outher;
+    //                 // }
+    //                 mat = true;
+    //                 // console.log('gg');
+    //                 // console.log(psevdoFrendStep)
+    //                 // console.log(psevdoEnemy[i])
+    //                 // console.log(chessArrWhite[15])
+    //                 // console.log(psevdoFrend[15])
+    //                 break outher;
+    //             }
+    //         }
+    //     }
+    //   }
+    //   if (mat === false) {
+    //     console.log('mat')
+    //     alert('mat')
+    //   }
     }
   }
 var ferzNumber = 2;

@@ -51,7 +51,7 @@ let clientTafel = {
                 item.xy = step[1]
             }
         })
-        check(chessArrBlack, chessArrWhite)
+        check(chessArrBlack,chessArrWhite)
       } else {
       let step = foo(chessArrWhite,chessArrBlack)
         console.log(step)
