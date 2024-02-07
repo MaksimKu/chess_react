@@ -107,8 +107,11 @@ let clientTafel = {
     heightTafel()
   })
 
-window.addEventListener('keydown', (e) => {
-  if(e.key==='k') {
+  window.addEventListener('load', () => {
+    console.log('ssss')
+  })
+window.addEventListener('load', (e) => {
+  
     game = false
       let chess = document.querySelector('.chess');
       let chessImg = document.querySelectorAll('.chessImg');
@@ -121,11 +124,12 @@ window.addEventListener('keydown', (e) => {
       chess.setAttribute('style', 
       `display:flex; height:auto; width:auto; justify-content:left;
         min-width:0; margin-top:6vmin; margin-left:-83vmin`);
-      // console.log(gameSetting.colorStep)
-  }})
-window.addEventListener('keyup', (e) => {
-  if(e.key==='k') {chessTafel(chessArrWhite)
-    chessTafel(chessArrBlack)}})
+        chessTafel(chessArrWhite)
+        chessTafel(chessArrBlack)
+  })
+// window.addEventListener('keyup', (e) => {
+//   if(e.key==='k') {chessTafel(chessArrWhite)
+//     chessTafel(chessArrBlack)}})
   
   
 function chessTafel(arr) {
